@@ -29,7 +29,7 @@ class App extends Component {
       <React.Fragment>
         <Layout>
           {this.state.redirectToReferrer === false ?
-              <EnterName handleSubmit={this.handleSubmit} onChange={this.handleChange}/> : <MainPage username={this.state.username}/>}
+              (<EnterName handleSubmit={this.handleSubmit} onChange={this.handleChange}/>) : (<MainPage username={this.state.username}/>)}
         </Layout>
     </React.Fragment>
     );
