@@ -7,7 +7,7 @@ import lolpng from '../assets/lolpng.png'
 const EnterName = (props) => {
     
     return (
-            <div class="sizing">
+            <div className="sizing">
                 <header>
                     <img src={lolpng} alt=''/>
                 </header>
