@@ -13,20 +13,9 @@ class MainPage extends Component {
         }
     }
 
-    // componentDidMount() {
-    //     const proxyurl = "https://cors-anywhere.herokuapp.com/";
-    //     const url = "http://ddragon.leagueoflegends.com/cdn/10.15.1/data/en_US/champion.json"; // site that doesn’t send Access-Control-*
-    //         fetch(proxyurl + url) // https://cors-anywhere.herokuapp.com/https://example.com
-    //             .then(response => response.text())
-    //             .then(contents => {
-    //                 this.state.data.push(contents)
-    //                 console.log(this.state.data)
-    //             })
-    //             .catch(() => console.log("Can’t access " + url + " response. Blocked by browser?"))   
-    // }
-
     componentDidMount() {
         const proxyurl = "https://cors-anywhere.herokuapp.com/";
+        
         const url = "http://ddragon.leagueoflegends.com/cdn/10.15.1/data/en_US/champion.json"; // site that doesn’t send Access-Control-*
             fetch(proxyurl + url) // https://cors-anywhere.herokuapp.com/https://example.com
                 .then(response => response.json())
