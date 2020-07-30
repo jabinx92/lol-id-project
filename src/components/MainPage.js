@@ -8,7 +8,7 @@ class MainPage extends Component {
     constructor(props) {
         super(props)
         this.state = {
-            data: [],
+            data: null,
             loaded: false
         }
     }
@@ -52,9 +52,12 @@ class MainPage extends Component {
     
 
     render() {
-        let Loader = Object.keys(this.state.data.data).map((loader =>
+        if(this.state.data === null) {
+            return <div>WIP</div>
+        }
+        let Loader = Object.entries(this.state.data.data).map(([name,loader]) =>
             <Heroes id={loader.key} hero={loader.id}/>
-        ))
+        )
         
         return (
             <div>
