@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { Layout } from './components/Layout';
-import EnterName from './components/EnterName';
+// import EnterName from './components/EnterName';
 import MainPage from './components/MainPage';
 import './App.css'
 
@@ -29,8 +29,9 @@ class App extends Component {
     return (
       <React.Fragment>
         <Layout>
-          {this.state.redirectToReferrer === false ?
-              (<EnterName className="EnterName" handleSubmit={this.handleSubmit} onChange={this.handleChange}/>) : (<MainPage username={this.state.username}/>)}
+          {/* {this.state.redirectToReferrer === false ?
+              (<EnterName className="EnterName" handleSubmit={this.handleSubmit} onChange={this.handleChange}/>) : (<MainPage username={this.state.username}/>)} */}
+              <MainPage/>
         </Layout>
       </React.Fragment>
     );
