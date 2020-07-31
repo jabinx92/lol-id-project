@@ -21,7 +21,7 @@ class MainPage extends Component {
                 .then(response => response.json())
                 .then(contents => {
                     this.setState({ data: contents})
-                    console.log(this.state.data.data)
+                    console.log(this.state.data)
                 })
                 .catch(() => console.log("Can’t access " + url + " response. Blocked by browser?"))   
 
@@ -45,7 +45,7 @@ class MainPage extends Component {
             return <div>WIP</div>
         }
         let Loader = Object.entries(this.state.data.data).map(([name,loader]) =>
-            <Heroes id={loader.key} hero={loader.id}/>
+            <Heroes key={loader.key} hero={loader.id} title={loader.title} blurb={loader.blurb}/>
         )
         
         return (
