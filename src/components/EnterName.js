@@ -1,5 +1,5 @@
 import React from 'react'
-import '../../src/App.css';
+import '../../src/App.scss';
 import lolpng from '../assets/lolpng.png'
 
 //https://chakra-ui.com/button recommended for nice styling

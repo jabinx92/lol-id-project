@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { Layout } from './components/Layout';
 import EnterName from './components/EnterName';
 import MainPage from './components/MainPage';
-import './App.css'
+import './App.scss'
 
 
 

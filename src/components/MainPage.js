@@ -42,7 +42,12 @@ class MainPage extends Component {
 
     render() {
         if(this.state.data === null) {
-            return <div>WIP</div>
+            return (<div class="wrap">
+            <div class="loading">
+              <div class="bounceball"></div>
+              <div class="text">NOW LOADING</div>
+            </div>
+          </div>)
         }
         let Loader = Object.entries(this.state.data.data).map(([name,loader]) =>
             <Heroes key={loader.key} hero={loader.id} title={loader.title} blurb={loader.blurb}/>
