@@ -24,8 +24,8 @@ class MainPage extends Component {
                     console.log(this.state.data)
                 })
                 .catch(() => console.log("Can’t access " + url + " response. Blocked by browser?"))   
-
     }
+    
 
 
     // componentDidMount() {
@@ -42,10 +42,10 @@ class MainPage extends Component {
 
     render() {
         if(this.state.data === null) {
-            return (<div class="wrap">
-            <div class="loading">
-              <div class="bounceball"></div>
-              <div class="text">NOW LOADING</div>
+            return (<div className="wrap">
+            <div className="loading">
+              <div className="bounceball"></div>
+              <div className="text">NOW LOADING</div>
             </div>
           </div>)
         }
