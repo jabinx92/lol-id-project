@@ -13,7 +13,8 @@ class FindSummoner extends Component {
         puuid: null,
         name: null,
         profileIconId: null,
-        summonerLevel: null
+        summonerLevel: null,
+        test: null
       };
     }
     
@@ -32,9 +33,10 @@ class FindSummoner extends Component {
               puuid: result.puuid,
               name: result.name,
               profileIconId: result.profileIconId,
-              summonerLevel: result.summonerLevel
+              summonerLevel: result.summonerLevel,
+              allInfo: result
             });
-            console.log(this.state.items)
+            console.log(this.state.test)
           },
           // Note: it's important to handle errors here
           // instead of a catch() block so that we don't swallow
@@ -63,6 +65,7 @@ class FindSummoner extends Component {
             {name}
             {profileIconId}
             {summonerLevel}
+            {id}
           </div>
         );
       }
