@@ -22,7 +22,7 @@ class App extends Component {
     this.setState({ redirectToReferrer: true});
   }
 
-  handleChange = (event) => {
+    handleChange = (event) => {
     this.setState({username: event.target.value});
   }
   

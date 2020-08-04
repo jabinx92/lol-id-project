@@ -45,7 +45,9 @@ class FindSummoner extends Component {
           (error) => {
             this.setState({
               isLoaded: true,
-              error
+              error: {
+                message: "Error - Something went wrong!"
+              }
             });
           }
         )
@@ -57,24 +59,25 @@ class FindSummoner extends Component {
         return <div>Error: {error.message}</div>;
       } else if (!isLoaded) {
         return <div>Loading...</div>;
-      } else {
+      } else if(isLoaded) {
         return (
           <Media>
-            <Image className="mr-3" src={"http://ddragon.leagueoflegends.com/cdn/10.15.1/img/profileicon/" + profileIconId + ".png"} alt="" rounded/>
-                <Media.Body>
-          <div>
-            Username: {name}
-            {id}
-            {accountId}
-            {puuid}
-            Summoner Leverl: {summonerLevel}
-          </div>
-                    
-                </Media.Body>
-        </Media>
+                  {name ?  (
+                    <div>
+                        <Image  src={"http://ddragon.leagueoflegends.com/cdn/10.15.1/img/profileicon/" + profileIconId + ".png"} alt="" rounded/>
+                      <Media.Body>
+                      Username:{name}
+                      Summoner Level: {summonerLevel}
+                      </Media.Body>
+                      
+                    </div>
+                  ) : (
+                    <div> Error - Username not found! </div>
+                    )}
+                    </Media>
+        
         );
-      }
     }
   }
-
+}
 export default FindSummoner;
