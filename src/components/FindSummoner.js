@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { Image, Media } from 'react-bootstrap';
 
 
 class FindSummoner extends Component {
@@ -21,7 +22,7 @@ class FindSummoner extends Component {
   
     componentDidMount() {
     const proxyurl = "https://cors-anywhere.herokuapp.com/";
-    const url = "https://cors-anywhere.herokuapp.com/https://na1.api.riotgames.com/lol/summoner/v4/summoners/by-name/" + this.state.username + "?api_key=RGAPI-37284532-c5e5-4249-a3dc-af8022a7678f"; // site that doesn’t send Access-Control-*
+    const url = "https://cors-anywhere.herokuapp.com/https://na1.api.riotgames.com/lol/summoner/v4/summoners/by-name/" + this.state.username + "?api_key=RGAPI-f74db59c-7381-4099-b5f9-b307f314aa6a"; // site that doesn’t send Access-Control-*
         fetch(proxyurl + url) // https://cors-anywhere.herokuapp.com/https://example.com
         .then(res => res.json())
         .then(
@@ -58,15 +59,19 @@ class FindSummoner extends Component {
         return <div>Loading...</div>;
       } else {
         return (
+          <Media>
+            <Image className="mr-3" src={"http://ddragon.leagueoflegends.com/cdn/10.15.1/img/profileicon/" + profileIconId + ".png"} alt="" rounded/>
+                <Media.Body>
           <div>
+            Username: {name}
             {id}
             {accountId}
             {puuid}
-            {name}
-            {profileIconId}
-            {summonerLevel}
-            {id}
+            Summoner Leverl: {summonerLevel}
           </div>
+                    
+                </Media.Body>
+        </Media>
         );
       }
     }

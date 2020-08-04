@@ -14,11 +14,12 @@ const EnterName = (props) => {
                 <div>Enter League of Legends Name:
                     <form onSubmit={props.handleSubmit}>
                         <label>
-                            <input type="text" name="name" placeholder="Input Here" onChange={props.onChange}/>
+                            <input type="text" name="name" placeholder="Input Here - try 'huhi'" onChange={props.onChange}/>
                         </label>
                             <input type="submit" value="Submit" />
                     </form>
                 </div>
+                <div>Ex - type in "DoubleLift"</div>
             </div>
     )
 }
