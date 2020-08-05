@@ -1,14 +1,6 @@
 import React, { Component } from 'react';
 import { Image, Media } from 'react-bootstrap';
-import  BRONZE  from '../assets/ranked-emblems/Emblem_Bronze.png'
-import  CHALLENGER  from '../assets/ranked-emblems/Emblem_Challenger.png'
-import  DIAMOND  from '../assets/ranked-emblems/Emblem_Diamond.png'
-import  GOLD  from '../assets/ranked-emblems/Emblem_Gold.png'
-import  GRANDMASTER  from '../assets/ranked-emblems/Emblem_Grandmaster.png'
-import  IRON  from '../assets/ranked-emblems/Emblem_Iron.png'
-import  MASTER  from '../assets/ranked-emblems/Emblem_Master.png'
-import  PLATINUM  from '../assets/ranked-emblems/Emblem_Platinum.png'
-import  SILVER  from '../assets/ranked-emblems/Emblem_Silver.png'
+
 
 
 
@@ -48,6 +40,7 @@ class SummonerRank extends Component {
             });
           }
         )
+        console.log("hello")
     }
   
   render() {
@@ -61,10 +54,13 @@ class SummonerRank extends Component {
         <Media>
         {stats.length ?  (
           <div>
-              <Image  src={rankedImage} alt={stats[0].tier} rounded/>
+              <Image src={"./ranked-emblems/CHALLENGER.png"} alt={stats[0].tier} rounded />
+
               <Media.Body>
-              Tier : {stats[0].tier} 
-              Rank : {stats[0].rank}
+              Tier : {stats[0].tier},  
+              Rank : {stats[0].rank}, 
+              Wins: {stats[0].wins}, 
+              Losses: {stats[0].losses} 
               </Media.Body>
               </div>
           ) : (

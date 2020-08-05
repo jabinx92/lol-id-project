@@ -67,8 +67,8 @@ class FindSummoner extends Component {
           <div>
               <Image  src={"http://ddragon.leagueoflegends.com/cdn/10.15.1/img/profileicon/" + profileIconId + ".png"} alt="" rounded/>
               <Media.Body>
-              Username : {name} 
-              Summoner Level : {summonerLevel}
+              Username : {name},  
+              Summoner Level : {summonerLevel}, 
               <SummonerRank id={id}/>
               </Media.Body>
               </div>
