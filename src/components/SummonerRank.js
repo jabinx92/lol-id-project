@@ -54,17 +54,17 @@ class SummonerRank extends Component {
         <Media>
         {stats.length ?  (
           <div>
-              <Image src={"/ranked-emblems/"+stats[0].tier+".png"} alt={stats[0].tier} rounded />
+            <Image src={"../ranked-emblems/"+stats[0].tier+".png"} alt={stats[0].tier} rounded />
 
-              <Image src={challenger} rounded />
+            <Image src={challenger} rounded />
 
-              <Media.Body>
-              Tier : {stats[0].tier},  
-              Rank : {stats[0].rank}, 
-              Wins: {stats[0].wins}, 
-              Losses: {stats[0].losses} 
-              </Media.Body>
-              </div>
+            <Media.Body>
+            Tier : {stats[0].tier},  
+            Rank : {stats[0].rank}, 
+            Wins: {stats[0].wins}, 
+            Losses: {stats[0].losses} 
+            </Media.Body>
+            </div>
           ) : (
             <div>
               User has not played any ranked games recently!
