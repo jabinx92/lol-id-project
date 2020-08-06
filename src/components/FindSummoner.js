@@ -3,6 +3,7 @@ import SummonerRank from './SummonerRank'
 import { Image, Media } from 'react-bootstrap';
 
 
+
 class FindSummoner extends Component {
     constructor(props) {
       super(props);
@@ -66,6 +67,7 @@ class FindSummoner extends Component {
         {name ?  (
           <div>
               <Image  src={"http://ddragon.leagueoflegends.com/cdn/10.15.1/img/profileicon/" + profileIconId + ".png"} alt="" rounded/>
+              
               <Media.Body>
               Username : {name},  
               Summoner Level : {summonerLevel}, 

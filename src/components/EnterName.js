@@ -19,7 +19,6 @@ const EnterName = (props) => {
                             <input type="submit" value="Submit" />
                     </form>
                 </div>
-                <div>Ex - type in "DoubleLift"</div>
             </div>
     )
 }

@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { Image, Media } from 'react-bootstrap';
-
+import challenger from '../ranked-emblems/CHALLENGER.png';
 
 
 
@@ -54,7 +54,9 @@ class SummonerRank extends Component {
         <Media>
         {stats.length ?  (
           <div>
-              <Image src={"./ranked-emblems/CHALLENGER.png"} alt={stats[0].tier} rounded />
+              <Image src={"/ranked-emblems/"+stats[0].tier+".png"} alt={stats[0].tier} rounded />
+
+              <Image src={challenger} rounded />
 
               <Media.Body>
               Tier : {stats[0].tier},  
