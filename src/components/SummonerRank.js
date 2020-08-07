@@ -59,7 +59,7 @@ class SummonerRank extends Component {
             Tier : {stats[0].tier},  
             Rank : {stats[0].rank}, 
             Wins: {stats[0].wins}, 
-            Losses: {stats[0].losses} 
+            Losses: {stats[0].losses}
             </Media.Body>
             </div>
           ) : (
