@@ -1,5 +1,4 @@
 import React from 'react'
-import '../../src/App.scss';
 import lolpng from '../assets/lolpng.png'
 
 import styled from 'styled-components';
@@ -8,6 +7,7 @@ import theme from '../style/theme'
 import mixins from '../style/mixins'
 
 const { colors, fonts } = theme;
+
 
 const StyledContainer = styled.div`
   ${mixins.flexCenter};
@@ -67,7 +67,7 @@ const EnterName = (props) => {
               <label>
                   <img src={lolpng} alt='LeagueLogo'/>
                   <label htmlFor="username">Enter League of Legends Username:</label>
-                  <input type="text" name="name" placeholder="Input Here - try 'huhi'" spellcheck="false" onChange={props.onChange}/>
+                  <input type="text" name="name" placeholder="Input Here - try 'huhi'" spellCheck="false" onChange={props.onChange}/>
               </label>
                   <input type="submit" value="Submit" />
           </form>

@@ -2,8 +2,6 @@ import React, { Component } from 'react';
 import EnterName from './components/EnterName';
 import MainPage from './components/MainPage';
 import FindSummoner from './components/FindSummoner'
-import './App.scss'
-
 
 
 class App extends Component {

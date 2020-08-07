@@ -21,10 +21,10 @@ class FindSummoner extends Component {
       };
     }
     
-  
+    
     componentDidMount() {
     const proxyurl = "https://cors-anywhere.herokuapp.com/";
-    const url = "https://cors-anywhere.herokuapp.com/https://na1.api.riotgames.com/lol/summoner/v4/summoners/by-name/" + this.state.username + "?api_key=RGAPI-d7e57a1c-a9de-4cac-95ae-c473e1df6bd1"; // site that doesn’t send Access-Control-*
+    const url = "https://cors-anywhere.herokuapp.com/https://na1.api.riotgames.com/lol/summoner/v4/summoners/by-name/" + this.state.username + "?api_key=" +process.env.REACT_APP_SECRET_KEY; // site that doesn’t send Access-Control-*
         fetch(proxyurl + url) // https://cors-anywhere.herokuapp.com/https://example.com
         .then(res => res.json())
         .then(
