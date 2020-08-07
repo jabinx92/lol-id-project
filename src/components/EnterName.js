@@ -61,18 +61,18 @@ const StyledContainer = styled.div`
 const EnterName = (props) => {
     
     return (
-        <main>
-      <StyledContainer>
-        <form onSubmit={props.handleSubmit}>
-            <label>
-                <img src={lolpng} alt='LeagueLogo'/>
-                <label htmlFor="username">Enter League of Legends Name:</label>
-                <input type="text" name="name" placeholder="Input Here - try 'huhi'" onChange={props.onChange}/>
-            </label>
-                <input type="submit" value="Submit" />
-        </form>
-      </StyledContainer>
-    </main>
+      <main>
+        <StyledContainer>
+          <form onSubmit={props.handleSubmit}>
+              <label>
+                  <img src={lolpng} alt='LeagueLogo'/>
+                  <label htmlFor="username">Enter League of Legends Username:</label>
+                  <input type="text" name="name" placeholder="Input Here - try 'huhi'" spellcheck="false" onChange={props.onChange}/>
+              </label>
+                  <input type="submit" value="Submit" />
+          </form>
+        </StyledContainer>
+      </main>
     )
 }
 

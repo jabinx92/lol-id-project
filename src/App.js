@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import { Layout } from './components/Layout';
 import EnterName from './components/EnterName';
 import MainPage from './components/MainPage';
 import FindSummoner from './components/FindSummoner'
@@ -28,17 +27,15 @@ class App extends Component {
   
   render() {
     return (
-      <React.Fragment>
-        <Layout>
-          {this.state.redirectToReferrer === false ?
-              (<EnterName className="EnterName" handleSubmit={this.handleSubmit} onChange={this.handleChange}/>) : (
-              <div>
-              <FindSummoner username={this.state.username}/>
-              <MainPage username={this.state.username}/>
-              </div>
-              )}
-        </Layout>
-      </React.Fragment>
+      <div>
+        {this.state.redirectToReferrer === false ?
+          (<EnterName className="EnterName" handleSubmit={this.handleSubmit} onChange={this.handleChange}/>) : (
+          <div>
+            <FindSummoner username={this.state.username}/>
+            <MainPage username={this.state.username}/>
+          </div>
+        )}
+      </div>
     );
   }
 }
