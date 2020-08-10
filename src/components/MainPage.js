@@ -14,10 +14,10 @@ class MainPage extends Component {
     }
 
     componentDidMount() {
-        const proxyurl = "https://cors-anywhere.herokuapp.com/";
+        // const proxyurl = "https://cors-anywhere.herokuapp.com/";
         
         const url = "http://ddragon.leagueoflegends.com/cdn/10.15.1/data/en_US/champion.json"; // site that doesn’t send Access-Control-*
-            fetch(proxyurl + url) // https://cors-anywhere.herokuapp.com/https://example.com
+            fetch(url) // https://cors-anywhere.herokuapp.com/https://ddragon.leagueoflegends.com/cdn/10.15.1/data/en_US/champion.json
                 .then(response => response.json())
                 .then(contents => {
                     this.setState({ data: contents})
