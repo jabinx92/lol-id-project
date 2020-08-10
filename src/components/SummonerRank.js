@@ -18,7 +18,7 @@ class SummonerRank extends Component {
     componentDidMount() {
     const proxyurl = "https://cors-anywhere.herokuapp.com/";
     const url = "https://na1.api.riotgames.com/lol/league/v4/entries/by-summoner/" + this.state.id + "?api_key=RGAPI-d7e57a1c-a9de-4cac-95ae-c473e1df6bd1"; // site that doesn’t send Access-Control-*
-        fetch(proxyurl + url) // https://cors-anywhere.herokuapp.com/https://example.com
+        fetch(proxyurl + url) // https://cors-anywhere.herokuapp.com/https://na1.api.riotgames.com/lol/league/v4/entries/by-summoner/
         .then(res => res.json())
         .then(
           (result) => {
@@ -56,9 +56,9 @@ class SummonerRank extends Component {
             <Image src={"ranked-emblems/"+stats[0].tier+".png"} alt={stats[0].tier} rounded />
 
             <Media.Body>
-            Tier : {stats[0].tier},  
-            Rank : {stats[0].rank}, 
-            Wins: {stats[0].wins}, 
+            Tier : {stats[0].tier},
+            Rank : {stats[0].rank},
+            Wins: {stats[0].wins},
             Losses: {stats[0].losses}
             </Media.Body>
             </div>
