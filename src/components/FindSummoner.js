@@ -26,12 +26,18 @@ class FindSummoner extends Component {
     componentDidMount() {
     // const proxyurl = "https://cors-anywhere.herokuapp.com/";
     const url = "https://cors-anywhere.herokuapp.com/https://na1.api.riotgames.com/lol/summoner/v4/summoners/by-name/" + this.state.username + "?api_key=" +process.env.REACT_APP_SECRET_KEY; // site that doesn’t send Access-Control-*
-        fetch(url) // https://cors-anywhere.herokuapp.com/https://cors-anywhere.herokuapp.com/https://na1.api.riotgames.com/lol/summoner/v4/summoners/by-name/
+        fetch(url) // https://cors-anywhere.herokuapp.com/https://example.com
         .then(res => res.json())
         .then(
           (result) => {
             this.setState({
               isLoaded: true,
+              id: result.id,
+              accountId: result.accountId,
+              puuid: result.puuid,
+              name: result.name,
+              profileIconId: result.profileIconId,
+              summonerLevel: result.summonerLevel,
               allInfo: result
             });
           },
@@ -50,7 +56,7 @@ class FindSummoner extends Component {
     }
   
   render() {
-    const { error, isLoaded, allInfo } = this.state;
+    const { error, isLoaded, id, name, profileIconId, summonerLevel } = this.state;
     if (error) {
       return <div>{error.message}</div>;
     } else if (!isLoaded) {
@@ -60,15 +66,15 @@ class FindSummoner extends Component {
         <Section dark>
 
         <Media>
-        {allInfo.name ?  (
+        {name ?  (
           <UserInfoStyles>
             <div>
-              <Image className="avatar" src={"http://ddragon.leagueoflegends.com/cdn/10.15.1/img/profileicon/" + allInfo.profileIconId + ".png"} alt="" rounded/>
+              <Image className="avatar" src={"http://ddragon.leagueoflegends.com/cdn/10.15.1/img/profileicon/" + profileIconId + ".png"} alt="" rounded/>
               
               <Media.Body>
-              Username : {allInfo.name},  
-              Summoner Level : {allInfo.summonerLevel}, 
-              <SummonerRank id={allInfo.id}/>
+              Username : {name},  
+              Summoner Level : {summonerLevel}, 
+              <SummonerRank id={id}/>
               </Media.Body>
             </div>
           </UserInfoStyles>
