@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 // import axios from 'axios';
 import Heroes from './Heroes'
 
-// const URL = "http://ddragon.leagueoflegends.com/cdn/10.15.1/data/en_US/champion.json";
 
 class MainPage extends Component {
     constructor(props) {
@@ -22,8 +21,6 @@ class MainPage extends Component {
                 })
                 .catch(() => console.log("Can’t access " + url + " response. Blocked by browser?"))   
     }
-
-    
 
     render() {
         if(this.state.data === null) {
