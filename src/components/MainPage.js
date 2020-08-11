@@ -14,7 +14,6 @@ class MainPage extends Component {
     }
 
     componentDidMount() {
-        
         const url = "https://ddragon.leagueoflegends.com/cdn/10.15.1/data/en_US/champion.json";
             fetch(url) 
                 .then(response => response.json())
@@ -23,18 +22,6 @@ class MainPage extends Component {
                 })
                 .catch(() => console.log("Can’t access " + url + " response. Blocked by browser?"))   
     }
-    
-
-
-    // componentDidMount() {
-    //     axios.get(URL)
-    //         .then(res => {
-    //             this.setState({
-    //                 data: res
-    //             });
-    //         });
-    //     console.log(this.state.data)
-    // }
 
     
 
