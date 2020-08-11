@@ -5,7 +5,7 @@ const Heroes = (props) => {
 
     return (
         <Media>
-            <Image className="mr-3" src={"http://ddragon.leagueoflegends.com/cdn/img/champion/loading/" + props.hero + "_0.jpg"} alt="props.hero" rounded/>
+            <Image className="mr-3" src={"https://ddragon.leagueoflegends.com/cdn/img/champion/loading/" + props.hero + "_0.jpg"} alt="props.hero" rounded/>
                 <Media.Body>
                     <h5>{props.hero + " " + props.title}</h5>
                         <p>
