@@ -69,10 +69,10 @@ class FindSummoner extends Component {
         {name ?  (
           <UserInfoStyles>
             <div>
-              <Image className="avatar" src={"https://ddragon.leagueoflegends.com/cdn/10.15.1/img/profileicon/" + profileIconId + ".png"} alt="" rounded/>
+              <Image className="avatar" src={"https://ddragon.leagueoflegends.com/cdn/10.15.1/img/profileicon/" + profileIconId + ".png"} alt="avatar" roundedCircle/>
               
               <Media.Body>
-              Username : {name},  
+              Usernameeeee : {name},  
               Summoner Level : {summonerLevel}, 
               <SummonerRank id={id}/>
               </Media.Body>
