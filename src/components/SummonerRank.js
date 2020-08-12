@@ -18,7 +18,7 @@ class SummonerRank extends Component {
     componentDidMount() {
     const proxyurl = "https://mysterious-wave-96239.herokuapp.com/";
 
-    const url = "https://na1.api.riotgames.com/lol/league/v4/entries/by-summoner/" + this.state.id + "?api_key=" +"RGAPI-d7e57a1c-a9de-4cac-95ae-c473e1df6bd1";
+    const url = "https://na1.api.riotgames.com/lol/league/v4/entries/by-summoner/" + this.state.id + "?api_key=" +process.env.REACT_APP_SECRET_KEY;
     // site that doesn’t send Access-Control-*
         fetch(proxyurl + url) // https://cors-anywhere.herokuapp.com/https://na1.api.riotgames.com/lol/league/v4/entries/by-summoner/
         .then(res => res.json())
