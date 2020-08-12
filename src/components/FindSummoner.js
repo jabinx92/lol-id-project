@@ -1,7 +1,9 @@
 import React, { Component } from 'react';
 import SummonerRank from './SummonerRank'
 import { Image, Media } from 'react-bootstrap';
-import UserInfoStyles from './styles/UserInfoStyles'
+import Octicon, { Rocket, Location } from '@githubprimer/octicons-react';
+
+import UserInfoStyles from './styles/UserInfoStyles';
 import Section from '../style/Section';
 
 
@@ -64,26 +66,39 @@ class FindSummoner extends Component {
     } else if(isLoaded) {
       return (
         <Section dark>
-
-        <Media>
         {name ?  (
           <UserInfoStyles>
-            <div>
+
               <Image className="avatar" src={"https://ddragon.leagueoflegends.com/cdn/10.15.1/img/profileicon/" + profileIconId + ".png"} alt="avatar" roundedCircle/>
               
               <Media.Body>
-              Usernameeeee : {name},  
-              Summoner Level : {summonerLevel}, 
+              <h1>
+                <a href={"https://na.op.gg/summoner/userName=" + this.state.name} target="_blank" rel="noopener noreferrer">
+                @{name}
+                </a>
+              </h1>
+                
+              <div className="info">
+                  <span className="info__item">
+                    <Octicon icon={Rocket} size="small" />
+                    Level: {summonerLevel}
+                  </span>
+
+                  <span className="info__item">
+                    <Octicon icon={Location} size="small" />
+                    North America
+                  </span>
+                </div>
+
               <SummonerRank id={id}/>
+
               </Media.Body>
-            </div>
           </UserInfoStyles>
           ) : (
             <div>
               Error - Username not found!
             </div>
           )}
-          </Media>
           </Section>
       );
     }

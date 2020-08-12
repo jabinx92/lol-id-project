@@ -1,7 +1,7 @@
 import styled from 'styled-components';
-import theme from '../../style/theme'
-import mixins from '../../style/mixins'
-import media from '../../style/media'
+import theme from '../../style/theme';
+import mixins from '../../style/mixins';
+import media from '../../style/media';
 const { colors, fonts } = theme;
 
 const UserInfoStyles = styled.div`
@@ -29,7 +29,7 @@ const UserInfoStyles = styled.div`
   h1 {
     font-size: 2.5rem;
     margin-bottom: 10px;
-    color: ${colors.offWhite};
+    color: ${colors.blue};
     ${media.bp400`
       font-size: 2rem;
     `};
@@ -47,7 +47,7 @@ const UserInfoStyles = styled.div`
   }
 
   a {
-    color: ${colors.lightestBlue};
+    color: ${colors.blue};
     &:hover,
     &:focus {
       text-decoration: underline;

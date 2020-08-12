@@ -3,6 +3,8 @@ import { Image, Media } from 'react-bootstrap';
 
 
 
+
+
 class SummonerRank extends Component {
     constructor(props) {
       super(props);
@@ -56,12 +58,20 @@ class SummonerRank extends Component {
           <div>
             <Image src={"ranked-emblems/"+stats[0].tier+".png"} alt={stats[0].tier} rounded />
 
-            <Media.Body>
-            Tier : {stats[0].tier},
-            Rank : {stats[0].rank},
-            Wins: {stats[0].wins},
-            Losses: {stats[0].losses}
-            </Media.Body>
+            <div className="stats">
+            <div className="stats__item">
+              <span className="num">{stats[0].tier}</span>
+              <span className="num-label">Rank</span>
+            </div>
+            <div className="stats__item">
+              <span className="num">{stats[0].wins}</span>
+              <span className="num-label">Wins</span>
+            </div>
+            <div className="stats__item">
+              <span className="num">{stats[0].losses}</span>
+              <span className="num-label">Losses</span>
+            </div>
+            </div>
             </div>
           ) : (
             <div>
