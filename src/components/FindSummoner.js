@@ -86,7 +86,7 @@ class FindSummoner extends Component {
 
                   <span className="info__item">
                     <Octicon icon={Location} size="small" />
-                    North America
+                    Region: North America
                   </span>
                 </div>
 

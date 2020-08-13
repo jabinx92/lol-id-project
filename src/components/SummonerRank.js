@@ -2,9 +2,6 @@ import React, { Component } from 'react';
 import { Image, Media } from 'react-bootstrap';
 
 
-
-
-
 class SummonerRank extends Component {
     constructor(props) {
       super(props);
@@ -29,7 +26,8 @@ class SummonerRank extends Component {
             this.setState({
               isLoaded: true,
               stats: result
-            });
+            },             console.log(result)
+            );
           },
           // Note: it's important to handle errors here
           // instead of a catch() block so that we don't swallow
@@ -56,7 +54,7 @@ class SummonerRank extends Component {
         <Media>
         {stats.length ?  (
           <div>
-            <Image src={"ranked-emblems/"+stats[0].tier+".png"} alt={stats[0].tier} rounded />
+            <Image width="250" src={"ranked-emblems/"+stats[0].tier+".png"} alt={stats[0].tier} rounded fluid/>
 
             <div className="stats">
             <div className="stats__item">
