@@ -20,7 +20,6 @@
     "styled-components": "^5.1.1"
   },
   "scripts": {
-    "//": "react-scripts start",
     "start": "serve -s build",
     "build": "react-scripts build",
     "test": "react-scripts test",
