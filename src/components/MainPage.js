@@ -12,6 +12,8 @@ class MainPage extends Component {
         }
     }
 
+
+
     componentDidMount() {
         const url = "https://ddragon.leagueoflegends.com/cdn/10.15.1/data/en_US/champion.json";
             fetch(url) 

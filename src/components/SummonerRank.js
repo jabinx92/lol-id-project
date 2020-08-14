@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { Image, Media } from 'react-bootstrap';
-
+import Picket from './Pyke'
 
 class SummonerRank extends Component {
     constructor(props) {
@@ -26,7 +26,7 @@ class SummonerRank extends Component {
             this.setState({
               isLoaded: true,
               stats: result
-            },             console.log(result)
+            }
             );
           },
           // Note: it's important to handle errors here
@@ -70,6 +70,7 @@ class SummonerRank extends Component {
               <span className="num-label">Losses</span>
             </div>
             </div>
+            <Picket/>
             </div>
           ) : (
             <div>
