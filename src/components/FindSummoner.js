@@ -5,6 +5,7 @@ import Octicon, { Rocket, Location } from '@githubprimer/octicons-react';
 
 import UserInfoStyles from './styles/UserInfoStyles';
 import Section from '../style/Section';
+import Corner from './Corner'
 
 
 class FindSummoner extends Component {
@@ -62,13 +63,15 @@ class FindSummoner extends Component {
     if (error) {
       return <div>{error.message}</div>;
     } else if (!isLoaded) {
-      return <div>Loading...</div>;
+      return (<Section dark><UserInfoStyles><h1>Loading...</h1></UserInfoStyles></Section>);
     } else if(isLoaded) {
       return (
         <Section dark>
+
         {name ?  (
           <UserInfoStyles>
-
+              
+              <Corner />
               <Image className="avatar" src={"https://ddragon.leagueoflegends.com/cdn/10.15.1/img/profileicon/" + profileIconId + ".png"} alt="avatar" roundedCircle/>
               
               <Media.Body>
@@ -95,9 +98,13 @@ class FindSummoner extends Component {
               </Media.Body>
           </UserInfoStyles>
           ) : (
-            <div>
+            <UserInfoStyles>
+            <Corner />
+            <h1>
               Error - Username not found!
-            </div>
+            </h1>
+            <p>Please press ctrl + R to refresh and try again.</p>
+            </UserInfoStyles>
           )}
           </Section>
       );

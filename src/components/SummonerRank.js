@@ -25,7 +25,7 @@ class SummonerRank extends Component {
             this.setState({
               isLoaded: true,
               stats: result
-            }
+            }, console.log(result)
             );
           },
           // Note: it's important to handle errors here
@@ -57,8 +57,8 @@ class SummonerRank extends Component {
 
             <div className="stats">
             <div className="stats__item">
-              <span className="num">{stats[0].tier}</span>
-              <span className="num-label">Rank</span>
+              <span className="num">{stats[0].losses + stats[0].wins}</span>
+              <span className="num-label">Total Games</span>
             </div>
             <div className="stats__item">
               <span className="num">{stats[0].wins}</span>
@@ -68,12 +68,24 @@ class SummonerRank extends Component {
               <span className="num">{stats[0].losses}</span>
               <span className="num-label">Losses</span>
             </div>
+            <div className="stats__item">
+              <span className="num">{Math.round(stats[0].wins / (stats[0].wins + stats[0].losses) * 100)}%</span>
+              <span className="num-label">Win Percent</span>
+            </div>
+            <div className="stats__item">
+              <span className="num">{stats[0].tier}</span>
+              <span className="num-label">Tier</span>
+            </div>
+            <div className="stats__item">
+              <span className="num">{stats[0].rank}</span>
+              <span className="num-label">Rank</span>
+            </div>
             </div>
             </div>
           ) : (
-            <div>
+            <h2>
               User has not played any ranked games recently!
-            </div>
+            </h2>
           )}
           </Media>
       );
