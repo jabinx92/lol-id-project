@@ -8,6 +8,7 @@ import Section from '../style/Section';
 import Corner from './Corner'
 
 
+
 class FindSummoner extends Component {
     constructor(props) {
       super(props);
@@ -21,10 +22,9 @@ class FindSummoner extends Component {
         name: null,
         profileIconId: null,
         summonerLevel: null,
-        test: null
+        test: null,
       };
     }
-    
     
     componentDidMount() {
     const proxyurl = "https://mysterious-wave-96239.herokuapp.com/";
@@ -66,6 +66,7 @@ class FindSummoner extends Component {
       return (<Section dark><UserInfoStyles><h1>Loading...</h1></UserInfoStyles></Section>);
     } else if(isLoaded) {
       return (
+
         <Section dark>
 
         {name ?  (
