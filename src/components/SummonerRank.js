@@ -25,7 +25,8 @@ class SummonerRank extends Component {
             this.setState({
               isLoaded: true,
               stats: result
-            }, console.log(result)
+            }
+            // ,console.log(result)
             );
           },
           // Note: it's important to handle errors here

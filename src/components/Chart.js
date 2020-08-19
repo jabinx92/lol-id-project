@@ -34,7 +34,7 @@ class Chart extends Component{
           }}
         />
 
-        <Line
+        {/* <Line
           data={this.state.chartData}
           options={{
             title:{
@@ -62,7 +62,7 @@ class Chart extends Component{
               position:this.props.legendPosition
             }
           }}
-        />
+        /> */}
       </div>
     )
   }

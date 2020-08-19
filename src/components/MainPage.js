@@ -59,24 +59,24 @@ class MainPage extends Component {
       }
 
     render() {
-        if(this.state.data === null) {
-            return (<div className="wrap">
-            <div className="loading">
-              <div className="bounceball"></div>
-              <div className="text">NOW LOADING</div>
-            </div>
-          </div>)
-        }
-        let Loader = Object.entries(this.state.data.data).map(([name,loader]) =>
-            <Heroes key={loader.key} hero={loader.id} title={loader.title} blurb={loader.blurb}/>
-        )
-        
-        return (
-            <div>
-                <Chart chartData={this.state.chartData} amount="20 Games" legendPosition="bottom"/>
-                {Loader}
-            </div>
-        )
+      if(this.state.data === null) {
+          return (<div className="wrap">
+          <div className="loading">
+            <div className="bounceball"></div>
+            <div className="text">NOW LOADING</div>
+          </div>
+        </div>)
+      }
+      let Loader = Object.entries(this.state.data.data).map(([name,loader]) =>
+          <Heroes key={loader.key} hero={loader.id} title={loader.title} blurb={loader.blurb}/>
+      )
+      
+      return (
+          <div>
+              <Chart chartData={this.state.chartData} amount="20 Games" legendPosition="bottom"/>
+              {Loader}
+          </div>
+      )
     }
 }
 
