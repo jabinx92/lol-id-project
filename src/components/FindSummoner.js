@@ -101,10 +101,9 @@ class FindSummoner extends Component {
 
               <SummonerRank id={id}/>
 
-              </Media.Body>
               <ChartData accountId={this.state.accountId}/>
+              </Media.Body>
           </UserInfoStyles>
-
           ) : (
             <UserInfoStyles>
             <Corner />

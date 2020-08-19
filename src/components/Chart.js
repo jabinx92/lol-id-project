@@ -16,10 +16,13 @@ class Chart extends Component{
     amount:'20 games'
   }
 
+  
+
   render(){
     return (
       <div className="chart">
         <Bar
+        
           data={this.state.chartData}
           options={{
             title:{
