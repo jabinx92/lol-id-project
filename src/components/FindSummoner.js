@@ -7,7 +7,7 @@ import UserInfoStyles from './styles/UserInfoStyles';
 import Section from '../style/Section';
 import Corner from './Corner'
 
-import ChartData from './ChartData'
+
 
 
 
@@ -101,7 +101,6 @@ class FindSummoner extends Component {
 
               <SummonerRank id={id}/>
 
-              <ChartData accountId={this.state.accountId}/>
               </Media.Body>
           </UserInfoStyles>
           ) : (

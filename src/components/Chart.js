@@ -22,7 +22,6 @@ class Chart extends Component{
     return (
       <div className="chart">
         <Bar
-        
           data={this.state.chartData}
           options={{
             title:{

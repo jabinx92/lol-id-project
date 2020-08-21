@@ -1,83 +1,84 @@
 import React, { Component } from 'react'
-import Chart from './Chart'
+import ChartDataAgain from './ChartDataAgain'
 
 class ChartData extends Component {
     constructor(props) {
         super(props)
         this.state = {
-            accountId: props.accountId,
+            username: props.username,
+            accountId: null,
             newData: null,
             championList: [],
-            championLibrary: null
+            championLibrary: null,
+            chartData: {},
+            data: null,
+            loaded: false
         }
     }
     getHeroes = (list) => {
       console.log(list)
     }
 
-    componentDidMount () {
-      this.getChartData();
-      let championList = [];
-      const proxyurl = "https://mysterious-wave-96239.herokuapp.com/";
-      fetch(proxyurl + `https://na1.api.riotgames.com/lol/match/v4/matchlists/by-account/${this.state.accountId}?endIndex=20&api_key=${process.env.REACT_APP_SECRET_KEY}`)
-        .then(res => res.json())
-        .then(
-          (result) => {
-            this.setState({
-              newData:  Object.entries(result.matches).map(([x,championId]) => {
-              return championList.push(championId.champion)
-              })
-            })
-          }
-        )
-
-
-        this.getHeroes(championList)
-
+    mounter = () => {
+        const proxyurl = "https://mysterious-wave-96239.herokuapp.com/";
+        const url = "https://na1.api.riotgames.com/lol/summoner/v4/summoners/by-name/" + this.state.username + "?api_key=" + process.env.REACT_APP_SECRET_KEY; // site that doesn’t send Access-Control-*
+           fetch(proxyurl + url) // https://cors-anywhere.herokuapp.com/https://na1.api.riotgames.com/lol/summoner/v4/summoners/by-name/
+            .then(res => res.json())
+            .then(
+              (result) => {
+                this.setState({
+                  accountId: result.accountId,
+                });
+              },
+              // Note: it's important to handle errors here
+              // instead of a catch() block so that we don't swallow
+              // exceptions from actual bugs in components.
+              (error) => {
+                this.setState({
+                  isLoaded: true,
+                  error: {
+                    message: "Error - Something went wrong!"
+                  }
+                });
+              }
+            )
     }
 
-    getChartData(){
-      // Ajax calls here
-      const url = "https://ddragon.leagueoflegends.com/cdn/10.15.1/data/en_US/champion.json";
-        fetch(url) 
-          .then(response => response.json())
-          .then(contents => {
-              this.setState({ championLibrary: contents})
-          })
-          .catch(() => console.log("Can’t access " + url + " response. Blocked by browser?"))
 
-      this.setState({
-        chartData:{
-          labels: ['Boston', 'Worcester', 'Springfield', 'Lowell', 'Cambridge', 'New Bedford'],
-          datasets:[
-            {
-              label:'Population',
-              data:[
-                617594,
-                181045,
-                153060,
-                106519,
-                105162,
-                95072
-              ],
-              backgroundColor:[
-                'rgba(255, 99, 132, 0.6)',
-                'rgba(54, 162, 235, 0.6)',
-                'rgba(255, 206, 86, 0.6)',
-                'rgba(75, 192, 192, 0.6)',
-                'rgba(153, 102, 255, 0.6)',
-                'rgba(255, 159, 64, 0.6)',
-                'rgba(255, 99, 132, 0.6)'
-              ]
-            }
-          ]
-        }
-      });
-    }
+      // componentDidMount = () => {
 
-    render() {  
+      //   const proxyurl = "https://mysterious-wave-96239.herokuapp.com/";
+      //   const url = "https://na1.api.riotgames.com/lol/summoner/v4/summoners/by-name/" + this.state.username + "?api_key=" + process.env.REACT_APP_SECRET_KEY; // site that doesn’t send Access-Control-*
+      //      fetch(proxyurl + url) // https://cors-anywhere.herokuapp.com/https://na1.api.riotgames.com/lol/summoner/v4/summoners/by-name/
+      //       .then(res => res.json())
+      //       .then(
+      //         (result) => {
+      //           this.setState({
+      //             accountId: result.accountId
+      //           });
+      //         },
+      //         // Note: it's important to handle errors here
+      //         // instead of a catch() block so that we don't swallow
+      //         // exceptions from actual bugs in components.
+      //         (error) => {
+      //           this.setState({
+      //             isLoaded: true,
+      //             error: {
+      //               message: "Error - Something went wrong!"
+      //             }
+      //           });
+      //         }
+      //       )
+
+      // }
+
+    
+
+    render() {
         return (
-        <Chart chartData={this.state.chartData} amount="20 Games" legendPosition="bottom"/>
+          <div>
+            <ChartDataAgain accountId={this.state.accountId}/>
+          </div>
         )
     }
 }
