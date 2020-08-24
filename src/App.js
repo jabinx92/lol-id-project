@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import EnterName from './components/EnterName';
 import MainPage from './components/MainPage';
 import FindSummoner from './components/FindSummoner';
-import ChartData from './components/ChartData'
+import Chart from './components/Chart'
 
 
 class App extends Component {
@@ -31,7 +31,8 @@ class App extends Component {
           (<EnterName className="EnterName" handleSubmit={this.handleSubmit} onChange={this.handleChange}/>) : (
           <div>
             <FindSummoner username={this.state.username}/>
-            <ChartData username={this.state.username}/>
+            <Chart username={this.state.username} legendPosition="bottom" displayTitle="true" />
+
             <MainPage username={this.state.username}/>
           </div>
         )}

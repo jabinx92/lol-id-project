@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 // import axios from 'axios';
-import Heroes from './Heroes'
-
+import Heroes from './Heroes';
 
 class MainPage extends Component {
     constructor(props) {
