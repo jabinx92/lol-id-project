@@ -16,7 +16,9 @@ class MainPage extends Component {
             fetch(url) 
                 .then(response => response.json())
                 .then(contents => {
-                    this.setState({ data: contents})
+                    this.setState({ 
+                        data: contents
+                     })
                 })
                 .catch(() => console.log("Can’t access " + url + " response. Blocked by browser?"))   
     }

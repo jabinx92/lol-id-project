@@ -1,70 +1,62 @@
 import React, {Component} from 'react'
-import {Bar, Line, Pie} from 'react-chartjs-2'
+import ChartData from './ChartData'
 
 class Chart extends Component {
     constructor(props) {
         super(props)
         this.state = {
-            chartData: {
-                labels: ['Zed', 'Akali', 'Nunu', 'Luxe', 'Amumu', 'Fiona'],
-                datasets:[
-                    {
-                        label:'Times Played',
-                        data:[
-                            8,
-                            2,
-                            4,
-                            4,
-                            1,
-                            1
-                        ],
-                        backgroundColor:[
-                            'rgba(255, 99, 132, 0.6)',
-                            'rgba(54, 162, 235, 0.6)',
-                            'rgba(255, 206, 86, 0.6)',
-                            'rgba(75, 192, 192, 0.6)',
-                            'rgba(153, 102, 255, 0.6)',
-                            'rgba(255, 159, 64, 0.6)',
-                            'rgba(255, 99, 132, 0.6)'
-                        ]
-                    }
-                ]
-            }
+            error: null,
+            isLoaded: false,
+            stats: [],
+            matchHistory: null,
+            chartData: {},
+            accountId: ''
         }
     }
 
-    static defaultProps = {
-        displayTitle: true,
-        displayLegends: true,
-        legendPosition: 'right'
+    
+
+    componentDidMount = () => {
+        const proxyurl = "https://mysterious-wave-96239.herokuapp.com/";
+        const url = "https://na1.api.riotgames.com/lol/summoner/v4/summoners/by-name/" + this.props.username + "?api_key=" +process.env.REACT_APP_SECRET_KEY;
+        fetch(proxyurl + url)
+        .then(res => res.json())
+        .then(
+            (result) => {
+                this.setState({
+                    isLoaded: true,
+                    stats: result,
+                    accountId: result.accountId
+                }
+                ,console.log(`this is the users account id = ` + result.accountId));
+            },
+            (error) => {
+                this.setState({
+                    isLoaded: true,
+                    error: {
+                        message: "Error - Something went wrong!"
+                }
+            });
+        }
+        )
     }
+
+    
+
     
     render () {
+    const { error, isLoaded } = this.state;
+    if (error) {
+      return <div>Error: {error.message}</div>;
+    } else if (!isLoaded) {
+      return <div>Loading...</div>;
+    } else if(isLoaded) {
         return (
             <div className="chart">
-                <Bar
-                    data={this.state.chartData}
-                    options={{
-                        scales: {
-                            yAxes: [{
-                              ticks: {
-                                beginAtZero: true
-                              }
-                            }]
-                          },
-                        title: {
-                        display: this.props.displayTitle,
-                        text: "Most played champions in 20 games",
-                        fontSize: 25
-                    },
-                    legend: {
-                    display: this.props.displayLegend,
-                    position: this.props.legendPosition
-                    }
-                }}
-                />
+            <ChartData accountId={this.state.accountId} />
             </div>
         )
+        }
     }
 }
 export default Chart
