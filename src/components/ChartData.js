@@ -11,9 +11,9 @@ class ChartData extends Component {
             error: null,
             isLoaded: false,
             accountId: props.accountId,
-            stats: [],
             matchHistory: null,
-            chartData: {}
+            chartData: {},
+            championLibrary: null
         }
     }
 
@@ -22,7 +22,32 @@ class ChartData extends Component {
         this.getChartData();
     }
 
+    getHeroJson () {
+      let championObj = {}
+      const proxyurl = "https://mysterious-wave-96239.herokuapp.com/";
+        const url = "https://ddragon.leagueoflegends.com/cdn/10.15.1/data/en_US/champion.json";
+          fetch(proxyurl + url) 
+            .then(response => response.json())
+            .then(contents => {
+                console.log(contents.data);
+                this.setState({ 
+                  championLibrary: Object.entries(contents.data).map(([key, value]) => {
+                  return  championObj[value.key] = [value.id].toString()
+                  }, console.log(championObj))
+                })
+            })
+            .catch(() => console.log("Can’t access " + url + " response. Blocked by browser?"))
+
+            
+            this.matchHeroes(championObj)
+    }
+
+    matchHeroes (heroList) {
+      console.log(heroList)
+    }
+
     getMatchHistory () {
+        let championList = [];
         const proxyurl = "https://mysterious-wave-96239.herokuapp.com/";
         const url = "https://na1.api.riotgames.com/lol/match/v4/matchlists/by-account/" + this.state.accountId + "?endIndex=20&api_key=" +process.env.REACT_APP_SECRET_KEY;
         fetch(proxyurl + url)
@@ -31,9 +56,12 @@ class ChartData extends Component {
             (result) => {
                 this.setState({
                     isLoaded: true,
-                    matchHistory: result
+                    matchHistory: Object.entries(result.matches).map(([x,championId]) => {
+                      return championList.push(championId.champion)
+                    })
                 }
-                ,console.log(result)
+                ,console.log(championList),
+                this.getHeroJson()
                 );
             },
             (error) => {
@@ -41,29 +69,31 @@ class ChartData extends Component {
                     isLoaded: true,
               error: {
                   message: "Error - Something went wrong!"
-                }
-            });
-        }
+                  }
+                });
+            }
         )
     }
 
 
     getChartData(){
+        let championCount = {
+          'Zed': 8,
+          'Akali': 2,
+          'Nunu' : 4,
+          'Luxe' : 4,
+          'Amumu': 1,
+          'Fiona': 1,
+          'Yassuo': 3
+        }
+
         this.setState({
           chartData:{
-            labels: ['Zed', 'Akali', 'Nunu', 'Luxe', 'Amumu', 'Fiona', 'Yassuo'],
+            labels: Object.keys(championCount),
             datasets:[
               {
                 label:'Population',
-                data:[
-                    8,
-                    2,
-                    4,
-                    4,
-                    1,
-                    1,
-                    3
-                ],
+                data: Object.values(championCount),
                 backgroundColor:[
                   'rgba(255, 99, 132, 0.6)',
                   'rgba(54, 162, 235, 0.6)',

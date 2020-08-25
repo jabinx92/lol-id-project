@@ -8,14 +8,11 @@ class Chart extends Component {
             error: null,
             isLoaded: false,
             stats: [],
-            matchHistory: null,
-            chartData: {},
             accountId: ''
         }
     }
 
     
-
     componentDidMount = () => {
         const proxyurl = "https://mysterious-wave-96239.herokuapp.com/";
         const url = "https://na1.api.riotgames.com/lol/summoner/v4/summoners/by-name/" + this.props.username + "?api_key=" +process.env.REACT_APP_SECRET_KEY;
@@ -25,10 +22,8 @@ class Chart extends Component {
             (result) => {
                 this.setState({
                     isLoaded: true,
-                    stats: result,
-                    accountId: result.accountId
-                }
-                ,console.log(`this is the users account id = ` + result.accountId));
+                    stats: result
+                });
             },
             (error) => {
                 this.setState({
@@ -42,8 +37,6 @@ class Chart extends Component {
     }
 
     
-
-    
     render () {
     const { error, isLoaded } = this.state;
     if (error) {
@@ -53,7 +46,7 @@ class Chart extends Component {
     } else if(isLoaded) {
         return (
             <div className="chart">
-            <ChartData accountId={this.state.accountId} />
+            <ChartData accountId={this.state.stats.accountId} />
             </div>
         )
         }
