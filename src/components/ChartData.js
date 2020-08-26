@@ -11,15 +11,15 @@ class ChartData extends Component {
             error: null,
             isLoaded: false,
             accountId: props.accountId,
-            matchHistory: null,
+            matchHistory: [],
             chartData: {},
-            championLibrary: null
+            championLibrary: null,
+            championList:[]
         }
     }
 
     componentDidMount = () => {
         this.getMatchHistory();
-        this.getChartData();
     }
 
     getMatchHistory = () => {
@@ -33,12 +33,14 @@ class ChartData extends Component {
                 this.setState({
                     isLoaded: true,
                     matchHistory: Object.entries(result.matches).map(([x,championId]) => {
-                      return championList.push(championId.champion)
+                      return championList.push(championId.champion.toString())
                     })
-                }
-                ,console.log(championList),
+                },
                 this.getHeroJson(championList)
-                );
+                )
+                this.setState({
+                  championList: championList
+                })
             },
             (error) => {
                 this.setState({
@@ -58,32 +60,26 @@ class ChartData extends Component {
           fetch(proxyurl + url) 
             .then(response => response.json())
             .then(contents => {
-                console.log(contents.data);
                 this.setState({ 
                   championLibrary: Object.entries(contents.data).map(([key, value]) => {
                   return  championObj[value.key] = [value.name].toString()
-                  }, console.log(championObj))
+                  })
                 })
             })
             .catch(() => console.log("Can’t access " + url + " response. Blocked by browser?"))
 
-            
+            this.setState({
+              championLibrary: championObj
+            })
+            // console.log(this.state.championLibrary)
             this.matchHeroes(championObj, championList)
     }
 
     matchHeroes = (championObj, championList) => {
       console.log(championObj)
-      console.log(championList)
+      console.log(championObj[championList[0]])
 
-      console.log(Object.keys(championObj))
-
-
-      let championTimesPlayed = {};
-      for(var i = 0 ; i < championList.length; i++) {
-      }
-      // console.log(championTimesPlayed)
-      return championTimesPlayed
-
+      this.getChartData();
     }
 
 
@@ -95,11 +91,9 @@ class ChartData extends Component {
           'Luxe' : 4,
           'Amumu': 1,
           'Fiona': 1,
-          'Yassuo': 3
+          'Yassuo': 3,
         }
 
-
-        
 
         this.setState({
           chartData:{
