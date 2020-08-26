@@ -17,36 +17,12 @@ class ChartData extends Component {
         }
     }
 
-    componentDidMount() {
+    componentDidMount = () => {
         this.getMatchHistory();
         this.getChartData();
     }
 
-    getHeroJson () {
-      let championObj = {}
-      const proxyurl = "https://mysterious-wave-96239.herokuapp.com/";
-        const url = "https://ddragon.leagueoflegends.com/cdn/10.15.1/data/en_US/champion.json";
-          fetch(proxyurl + url) 
-            .then(response => response.json())
-            .then(contents => {
-                console.log(contents.data);
-                this.setState({ 
-                  championLibrary: Object.entries(contents.data).map(([key, value]) => {
-                  return  championObj[value.key] = [value.id].toString()
-                  }, console.log(championObj))
-                })
-            })
-            .catch(() => console.log("Can’t access " + url + " response. Blocked by browser?"))
-
-            
-            this.matchHeroes(championObj)
-    }
-
-    matchHeroes (heroList) {
-      console.log(heroList)
-    }
-
-    getMatchHistory () {
+    getMatchHistory = () => {
         let championList = [];
         const proxyurl = "https://mysterious-wave-96239.herokuapp.com/";
         const url = "https://na1.api.riotgames.com/lol/match/v4/matchlists/by-account/" + this.state.accountId + "?endIndex=20&api_key=" +process.env.REACT_APP_SECRET_KEY;
@@ -61,7 +37,7 @@ class ChartData extends Component {
                     })
                 }
                 ,console.log(championList),
-                this.getHeroJson()
+                this.getHeroJson(championList)
                 );
             },
             (error) => {
@@ -75,8 +51,43 @@ class ChartData extends Component {
         )
     }
 
+    getHeroJson = (championList) => {
+      let championObj = {}
+      const proxyurl = "https://mysterious-wave-96239.herokuapp.com/";
+        const url = "https://ddragon.leagueoflegends.com/cdn/10.15.1/data/en_US/champion.json";
+          fetch(proxyurl + url) 
+            .then(response => response.json())
+            .then(contents => {
+                console.log(contents.data);
+                this.setState({ 
+                  championLibrary: Object.entries(contents.data).map(([key, value]) => {
+                  return  championObj[value.key] = [value.name].toString()
+                  }, console.log(championObj))
+                })
+            })
+            .catch(() => console.log("Can’t access " + url + " response. Blocked by browser?"))
 
-    getChartData(){
+            
+            this.matchHeroes(championObj, championList)
+    }
+
+    matchHeroes = (championObj, championList) => {
+      console.log(championObj)
+      console.log(championList)
+
+      console.log(Object.keys(championObj))
+
+
+      let championTimesPlayed = {};
+      for(var i = 0 ; i < championList.length; i++) {
+      }
+      // console.log(championTimesPlayed)
+      return championTimesPlayed
+
+    }
+
+
+    getChartData = () => {
         let championCount = {
           'Zed': 8,
           'Akali': 2,
@@ -86,6 +97,9 @@ class ChartData extends Component {
           'Fiona': 1,
           'Yassuo': 3
         }
+
+
+        
 
         this.setState({
           chartData:{
