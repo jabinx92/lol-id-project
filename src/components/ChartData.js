@@ -32,11 +32,12 @@ class ChartData extends Component {
             (result) => {
                 this.setState({
                     isLoaded: true,
-                    matchHistory: Object.entries(result.matches).map(([x,championId]) => {
-                      return championList.push(championId.champion.toString())
-                    })
+                    matchHistory: Object.entries(result.matches).map(([x,championId]) => 
+                       championList.push(championId.champion.toString())
+                    )
                 }
                 )
+                this.getHeroJson(championList)
                 this.setState({
                   championList: championList
                 })
@@ -51,7 +52,6 @@ class ChartData extends Component {
             }
             
         )
-        this.getHeroJson(championList)
     }
 
     getHeroJson = (championList) => {
@@ -63,19 +63,16 @@ class ChartData extends Component {
             .then(contents => {
                   Object.entries(contents.data).map(([key, value]) => 
                     championObj[value.key] = [value.name].toString()
-                  ) 
+                  )
+                  this.matchHeroes(championObj, championList)
             })
             .catch(() => console.log("Can’t access " + url + " response. Blocked by browser?"))
-
-            // this.setState({
-            //   championLibrary: championObj
-            // })
-            // console.log(this.state.championLibrary)
-            this.matchHeroes(championObj, championList)
     }
 
     matchHeroes = (championObj, championList) => {
       console.log(championObj)
+      console.log(championList)
+
       console.log(championObj[1])
       Object.entries(championObj).map(([name, loader])=> {
         console.log(name, loader)
