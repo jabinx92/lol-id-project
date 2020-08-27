@@ -13,7 +13,7 @@ class ChartData extends Component {
             accountId: props.accountId,
             matchHistory: [],
             chartData: {},
-            championLibrary: null,
+            championLibrary: {},
             championList:[]
         }
     }
@@ -60,25 +60,25 @@ class ChartData extends Component {
           fetch(proxyurl + url) 
             .then(response => response.json())
             .then(contents => {
-                this.setState({ 
-                  championLibrary: Object.entries(contents.data).map(([key, value]) => {
-                  return  championObj[value.key] = [value.name].toString()
-                  })
-                })
+                  Object.entries(contents.data).map(([key, value]) => 
+                    championObj[value.key] = [value.name].toString()
+                  ) 
             })
             .catch(() => console.log("Can’t access " + url + " response. Blocked by browser?"))
 
-            this.setState({
-              championLibrary: championObj
-            })
+            // this.setState({
+            //   championLibrary: championObj
+            // })
             // console.log(this.state.championLibrary)
             this.matchHeroes(championObj, championList)
     }
 
     matchHeroes = (championObj, championList) => {
       console.log(championObj)
-      console.log(championObj[championList[0]])
-
+      console.log(championObj[1])
+      Object.entries(championObj).map(([name, loader])=> {
+        console.log(name, loader)
+      })
       this.getChartData();
     }
 
