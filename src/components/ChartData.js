@@ -35,8 +35,7 @@ class ChartData extends Component {
                     matchHistory: Object.entries(result.matches).map(([x,championId]) => {
                       return championList.push(championId.champion.toString())
                     })
-                },
-                this.getHeroJson(championList)
+                }
                 )
                 this.setState({
                   championList: championList
@@ -50,7 +49,9 @@ class ChartData extends Component {
                   }
                 });
             }
+            
         )
+        this.getHeroJson(championList)
     }
 
     getHeroJson = (championList) => {
