@@ -1,8 +1,9 @@
-import React, {Component} from 'react'
-import {Bar
-    // ,Line
-    // ,Pie
-} from 'react-chartjs-2'
+import React, {Component} from 'react';
+import {Bar,Line,Pie} from 'react-chartjs-2';
+import ChartStyles from './styles/ChartsStyles';
+import  Section  from '../style/Section';
+
+
 
 class ChartData extends Component {
     constructor(props) {
@@ -70,36 +71,30 @@ class ChartData extends Component {
     }
 
     matchHeroes = (championObj, championList) => {
-      console.log(championObj)
-      console.log(championList)
-
-      console.log(championObj[1])
-      Object.entries(championObj).map(([name, loader])=> {
-        console.log(name, loader)
-      })
-      this.getChartData();
+      let obj = {}
+      //loop over championList array to compare with championObj object
+      for (var i = 0; i < championList.length; i++) {
+      //if the index is not in the object, add it into empty object and make the value 1
+      if (obj[championObj[championList[i]]] === undefined) {
+        obj[championObj[championList[i]]] = 1
+        //else if the index is already found in the object, increment the value by + 1 
+      } else if (obj[championObj[championList[i]]] !== undefined) {
+        obj[championObj[championList[i]]] += 1
+      }
+    }
+    //return the object
+    return this.getChartData(obj)
     }
 
 
-    getChartData = () => {
-        let championCount = {
-          'Zed': 8,
-          'Akali': 2,
-          'Nunu' : 4,
-          'Luxe' : 4,
-          'Amumu': 1,
-          'Fiona': 1,
-          'Yassuo': 3,
-        }
-
-
+    getChartData = (obj) => {
         this.setState({
           chartData:{
-            labels: Object.keys(championCount),
+            labels: Object.keys(obj),
             datasets:[
               {
                 label:'Population',
-                data: Object.values(championCount),
+                data: Object.values(obj),
                 backgroundColor:[
                   'rgba(255, 99, 132, 0.6)',
                   'rgba(54, 162, 235, 0.6)',
@@ -122,30 +117,94 @@ class ChartData extends Component {
     }
     
     render () {
+        const chartSize = 200
         return (
-            <div className="chart">
+          <Section>
+            <ChartStyles>
+              <div className="chart">
+              <header>
+              <h2>Top 3 Champs (20 Games)</h2>
+              </header>
+              <div className="chart-container">
+              <canvas id="langChart" width={chartSize} height={chartSize} />
                 <Bar
                     data={this.state.chartData}
                     options={{
-                        scales: {
-                            yAxes: [{
-                              ticks: {
-                                beginAtZero: true
-                              }
-                            }]
-                          },
-                        title: {
+                      scales: {
+                        yAxes: [{
+                          ticks: {
+                            beginAtZero: true,
+                            callback: function (value) { if (Number.isInteger(value)) { return value; } }
+                          }
+                        }]
+                      },
+                      title: {
                         display: this.props.displayTitle,
-                        text: "Most played champions in 20 games",
                         fontSize: 25
-                    },
-                    legend: {
-                    display: this.props.displayLegend,
-                    position: this.props.legendPosition
-                    }
-                }}
-                />
-            </div>
+                      },
+                      legend: {
+                        display: this.props.displayLegend,
+                        position: this.props.legendPosition
+                      }
+                    }}
+                    />
+              </div>
+              </div>
+
+              <div className="chart">
+              <header>
+              <h2>Top 3 Champs (20 Games)</h2>
+              </header>
+              <div className="chart-container">
+              <canvas id="langChart" width={chartSize} height={chartSize} />
+                <Line
+                    data={this.state.chartData}
+                    options={{
+                      scales: {
+                        yAxes: [{
+                          ticks: {
+                            beginAtZero: true,
+                            callback: function (value) { if (Number.isInteger(value)) { return value; } }
+                          }
+                        }]
+                      },
+                      title: {
+                        display: this.props.displayTitle,
+                        fontSize: 25
+                      },
+                      legend: {
+                        display: this.props.displayLegend,
+                        position: this.props.legendPosition
+                      }
+                    }}
+                    />
+              </div>
+              </div>
+
+              <div className="chart">
+              <header>
+              <h2>Top 3 Champs (20 Games)</h2>
+              </header>
+              <div className="chart-container">
+              <canvas id="langChart" width={chartSize} height={chartSize} />
+                <Pie
+                    data={this.state.chartData}
+                    options={{
+                      scales: {
+                      },
+                      title: {
+                        display: this.props.displayTitle
+                      },
+                      legend: {
+                        display: this.props.displayLegend,
+                        position: this.props.legendPosition
+                      }
+                    }}
+                    />
+              </div>
+              </div>
+            </ChartStyles>
+          </Section>
         )
     }
 }

@@ -42,7 +42,7 @@ class Chart extends Component {
     if (error) {
       return <div>Error: {error.message}</div>;
     } else if (!isLoaded) {
-      return <div>Loading...</div>;
+      return <div> </div>;
     } else if(isLoaded) {
         return (
             <div className="chart">
