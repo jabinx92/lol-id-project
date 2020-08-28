@@ -43,6 +43,21 @@ class SummonerRank extends Component {
     }
   
   render() {
+    
+    let ranks = {
+      "IRON": "Iron",
+      "BRONZE": "Bronze",
+      "SILVER": "Silver",
+      "GOLD": "Gold",
+      "PLATINUM": "Platinum",
+      "DIAMOND": "Diamond",
+      "MASTER": "Master",
+      "GRANDMASTER": "Grandmaster",
+      "CHALLENGER": "Challenger"
+
+    }
+
+
     const { error, isLoaded, stats } = this.state;
     if (error) {
       return <div>Error: {error.message}</div>;
@@ -73,7 +88,7 @@ class SummonerRank extends Component {
               <span className="num-label">Win Percent</span>
             </div>
             <div className="stats__item">
-              <span className="num">{stats[0].tier}</span>
+              <span className="num">{ranks[stats[0].tier]}</span>
               <span className="num-label">Tier</span>
             </div>
             <div className="stats__item">

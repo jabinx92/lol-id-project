@@ -29,7 +29,7 @@ const UserInfoStyles = styled.div`
   h1 {
     font-size: 2.5rem;
     margin-bottom: 10px;
-    color: ${colors.blue};
+    color: ${colors.white};
     ${media.bp400`
       font-size: 2rem;
     `};
@@ -43,7 +43,7 @@ const UserInfoStyles = styled.div`
     }
   }
   h3 {
-    color: ${colors.lightblue};
+    color: ${colors.white};
   }
 
   a {

@@ -102,7 +102,20 @@ class ChartData extends Component {
                   'rgba(75, 192, 192, 0.6)',
                   'rgba(153, 102, 255, 0.6)',
                   'rgba(255, 159, 64, 0.6)',
-                  'rgba(255, 99, 132, 0.6)'
+                  'rgba(255, 99, 132, 0.6)',
+                  'rgba(54, 162, 235, 0.6)',
+                  'rgba(255, 206, 86, 0.6)',
+                  'rgba(75, 192, 192, 0.6)',
+                  'rgba(153, 102, 255, 0.6)',
+                  'rgba(255, 159, 64, 0.6)',
+                  'rgba(255, 99, 132, 0.6)',
+                  'rgba(54, 162, 235, 0.6)',
+                  'rgba(255, 206, 86, 0.6)',
+                  'rgba(75, 192, 192, 0.6)',
+                  'rgba(153, 102, 255, 0.6)',
+                  'rgba(255, 159, 64, 0.6)',
+                  'rgba(255, 99, 132, 0.6)',
+                  'rgba(54, 162, 235, 0.6)',
                 ]
               }
             ]
@@ -117,90 +130,93 @@ class ChartData extends Component {
     }
     
     render () {
-        const chartSize = 200
+        const chartSize = 0
         return (
           <Section>
             <ChartStyles>
               <div className="chart">
-              <header>
-              <h2>Top 3 Champs (20 Games)</h2>
-              </header>
               <div className="chart-container">
-              <canvas id="langChart" width={chartSize} height={chartSize} />
+              <header>
+              <h2>Top Champs in 20 Games</h2>
+              </header>
                 <Bar
-                    data={this.state.chartData}
-                    options={{
-                      scales: {
-                        yAxes: [{
-                          ticks: {
-                            beginAtZero: true,
-                            callback: function (value) { if (Number.isInteger(value)) { return value; } }
-                          }
-                        }]
-                      },
-                      title: {
-                        display: this.props.displayTitle,
-                        fontSize: 25
-                      },
-                      legend: {
-                        display: this.props.displayLegend,
-                        position: this.props.legendPosition
-                      }
-                    }}
-                    />
+                  data={this.state.chartData}
+                  width={100}
+                  height={100}
+                  options={{
+                    scales: {
+                      yAxes: [{
+                        ticks: {
+                          beginAtZero: true,
+                          callback: function (value) { if (Number.isInteger(value)) { return value; } }
+                        }
+                      }]
+                    },
+                    title: {
+                      display: this.props.displayTitle,
+                      fontSize: 25
+                    },
+                    legend: {
+                      display: this.props.displayLegend,
+                      position: this.props.legendPosition
+                    }
+                  }}
+                />
               </div>
               </div>
 
               <div className="chart">
               <header>
-              <h2>Top 3 Champs (20 Games)</h2>
+              <h2>Top Champs in 20 Games</h2>
               </header>
               <div className="chart-container">
-              <canvas id="langChart" width={chartSize} height={chartSize} />
                 <Line
-                    data={this.state.chartData}
-                    options={{
-                      scales: {
-                        yAxes: [{
-                          ticks: {
-                            beginAtZero: true,
-                            callback: function (value) { if (Number.isInteger(value)) { return value; } }
-                          }
-                        }]
-                      },
-                      title: {
-                        display: this.props.displayTitle,
-                        fontSize: 25
-                      },
-                      legend: {
-                        display: this.props.displayLegend,
-                        position: this.props.legendPosition
-                      }
-                    }}
-                    />
+                  data={this.state.chartData}
+                  width={100}
+                  height={100}
+                  options={{
+                    scales: {
+                      yAxes: [{
+                        ticks: {
+                          beginAtZero: true,
+                          callback: function (value) { if (Number.isInteger(value)) { return value; } }
+                        }
+                      }]
+                    },
+                    title: {
+                      display: this.props.displayTitle,
+                      fontSize: 25
+                    },
+                    legend: {
+                      display: this.props.displayLegend,
+                      position: this.props.legendPosition
+                    }
+                  }}
+                />
               </div>
               </div>
 
               <div className="chart">
               <header>
-              <h2>Top 3 Champs (20 Games)</h2>
+              <h2>Top Champs in 20 Games</h2>
               </header>
               <div className="chart-container">
-              <canvas id="langChart" width={chartSize} height={chartSize} />
                 <Pie
-                    data={this.state.chartData}
-                    options={{
-                      scales: {
-                      },
-                      title: {
-                        display: this.props.displayTitle
-                      },
-                      legend: {
-                        display: this.props.displayLegend,
-                        position: this.props.legendPosition
-                      }
-                    }}
-                    />
+                  data={this.state.chartData}
+                  width={100}
+                  height={100}
+                  options={{
+                    scales: {
+                    },
+                    title: {
+                      display: this.props.displayTitle
+                    },
+                    legend: {
+                      display: this.props.displayLegend,
+                      position: this.props.legendPosition
+                    }
+                  }}
+                />
               </div>
               </div>
             </ChartStyles>
