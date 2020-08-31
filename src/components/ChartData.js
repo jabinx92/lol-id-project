@@ -15,7 +15,8 @@ class ChartData extends Component {
             matchHistory: [],
             chartData: {},
             championLibrary: {},
-            championList:[]
+            championList:[],
+            pieData: {}
         }
     }
 
@@ -57,6 +58,7 @@ class ChartData extends Component {
 
     getHeroJson = (championList) => {
       let championObj = {}
+      let roleObj = {}
       const proxyurl = "https://mysterious-wave-96239.herokuapp.com/";
         const url = "https://ddragon.leagueoflegends.com/cdn/10.15.1/data/en_US/champion.json";
           fetch(proxyurl + url) 
@@ -65,11 +67,44 @@ class ChartData extends Component {
                   Object.entries(contents.data).map(([key, value]) => 
                     championObj[value.key] = [value.name].toString()
                   )
+                  Object.entries(contents.data).map(([key, value]) => {
+                    if(roleObj[value.tags[0]] === undefined) {
+                      roleObj[value.tags[0]] = 1
+                    } else if (roleObj[value.tags[0]] !== undefined){
+                      roleObj[value.tags[0]] += 1 
+                    }
+                  })
+                  console.log(roleObj)
+                  this.getPieChartData(roleObj)
                   this.matchHeroes(championObj, championList)
             })
             .catch(() => console.log("Can’t access " + url + " response. Blocked by browser?"))
     }
 
+    getPieChartData = (roleObj) => {
+      {
+        this.setState({
+          pieData:{
+            labels: Object.keys(roleObj),
+            datasets:[
+              {
+                label:'Population',
+                data: Object.values(roleObj),
+                backgroundColor:[
+                  'rgba(255, 99, 132, 0.6)',
+                  'rgba(54, 162, 235, 0.6)',
+                  'rgba(255, 206, 86, 0.6)',
+                  'rgba(75, 192, 192, 0.6)',
+                  'rgba(153, 102, 255, 0.6)',
+                  'rgba(255, 159, 64, 0.6)'
+                ]
+              }
+            ]
+          }
+        });
+      }
+    }
+ 
     matchHeroes = (championObj, championList) => {
       let obj = {}
       //loop over championList array to compare with championObj object
@@ -130,14 +165,13 @@ class ChartData extends Component {
     }
     
     render () {
-        const chartSize = 0
         return (
           <Section>
             <ChartStyles>
               <div className="chart">
               <div className="chart-container">
               <header>
-              <h2>Top Champs in 20 Games</h2>
+              <h2>Top Champions in 20 Games</h2>
               </header>
                 <Bar
                   data={this.state.chartData}
@@ -198,22 +232,22 @@ class ChartData extends Component {
 
               <div className="chart">
               <header>
-              <h2>Top Champs in 20 Games</h2>
+              <h2>Total Champion Roles</h2>
               </header>
               <div className="chart-container">
                 <Pie
-                  data={this.state.chartData}
+                  data={this.state.pieData}
                   width={100}
                   height={100}
                   options={{
                     scales: {
                     },
                     title: {
-                      display: this.props.displayTitle
+                      display: true
                     },
                     legend: {
-                      display: this.props.displayLegend,
-                      position: this.props.legendPosition
+                      display: true,
+                      position: 'right'
                     }
                   }}
                 />
