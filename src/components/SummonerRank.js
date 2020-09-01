@@ -68,7 +68,7 @@ class SummonerRank extends Component {
         <Media>
         {stats.length ?  (
           <div>
-            <Image width="250" src={"ranked-emblems/"+stats[0].tier+".png"} alt={stats[0].tier} rounded fluid/>
+            {/* <Image width="250" src={"ranked-emblems/"+stats[0].tier+".png"} alt={stats[0].tier} rounded fluid/> */}
 
             <div className="stats">
             <div className="stats__item">

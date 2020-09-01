@@ -1,5 +1,7 @@
 import React, {Component} from 'react';
-import {Bar,Line,Pie} from 'react-chartjs-2';
+import {Bar
+  // ,Line
+  ,Pie} from 'react-chartjs-2';
 import ChartStyles from './styles/ChartsStyles';
 import  Section  from '../style/Section';
 
@@ -33,6 +35,7 @@ class ChartData extends Component {
     getMatchHistory = () => {
         let championList = [];
         let queueObj = {};
+        if(!this.state.accountId) {return}
         const proxyurl = "https://mysterious-wave-96239.herokuapp.com/";
         const url = "https://na1.api.riotgames.com/lol/match/v4/matchlists/by-account/" + this.state.accountId + "?endIndex=20&api_key=" +process.env.REACT_APP_SECRET_KEY;
         fetch(proxyurl + url)
@@ -84,6 +87,7 @@ class ChartData extends Component {
                       queueObj["Normal Draft"] += 1
                     }
                   }
+                  return queueObj
                 })
                 this.getQueueChart(queueObj)
                 this.getHeroJson(championList)
@@ -120,6 +124,7 @@ class ChartData extends Component {
                     } else if (roleObj[value.tags[0]] !== undefined){
                       roleObj[value.tags[0]] += 1 
                     }
+                    return roleObj
                   })
                   this.getPieChartData(roleObj)
                   this.matchHeroes(championObj, championList)
@@ -128,7 +133,7 @@ class ChartData extends Component {
     }
 
     getPieChartData = (roleObj) => {
-      {
+      console.log(roleObj)
         this.setState({
           pieData:{
             labels: Object.keys(roleObj),
@@ -148,11 +153,13 @@ class ChartData extends Component {
             ]
           }
         });
-      }
     }
 
     getQueueChart = (queueObj) => {
-      {
+      if(queueObj === {}) {
+        this.setState({queueData: {}})
+        return
+      }
         this.setState({
           queueData:{
             labels: Object.keys(queueObj),
@@ -172,7 +179,6 @@ class ChartData extends Component {
             ]
           }
         });
-      }
     }
  
     matchHeroes = (championObj, championList) => {
@@ -243,7 +249,7 @@ class ChartData extends Component {
               <header>
               <h2>Top Champions in 20 Games</h2>
               </header>
-                {this.state.chartData !== {} ? 
+                {this.state.accountId ? 
                 <Bar
                   data={this.state.chartData}
                   width={100}
@@ -266,7 +272,7 @@ class ChartData extends Component {
                       position: this.props.legendPosition
                     }
                   }}
-                /> : <div>Nothing to show!</div>}
+                /> : <h3>Nothing to show!</h3>}
               </div>
               </div>
 
@@ -275,22 +281,22 @@ class ChartData extends Component {
               <h2>Top Game Modes Played</h2>
               </header>
               <div className="chart-container">
-                {this.state.queueData !== {} ? <Pie
+                {this.state.accountId ? 
+                <Pie
                   data={this.state.queueData}
                   width={100}
                   height={100}
                   options={{
-                    
                     title: {
                       display: this.props.displayTitle,
                       fontSize: 25
                     },
                     legend: {
-                      display: this.props.displayLegend,
-                      position: this.props.legendPosition
+                      display: true,
+                      position: 'right'
                     }
                   }}
-                />: <div>Nothing to show!</div>}
+                />: <h3>Nothing to show!</h3>}
               </div>
               </div>
 
@@ -299,7 +305,7 @@ class ChartData extends Component {
               <h2>Total Champion Roles</h2>
               </header>
               <div className="chart-container">
-              {this.state.queueData !== {}? 
+              {this.state.accountId ?  
                 <Pie
                   data={this.state.pieData}
                   width={100}
@@ -315,7 +321,7 @@ class ChartData extends Component {
                       position: 'right'
                     }
                   }}
-                /> : <div>Nothing to show!</div> }
+                /> : <h3>Nothing to show!</h3> }
               </div>
               </div>
             </ChartStyles>
