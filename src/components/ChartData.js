@@ -243,7 +243,7 @@ class ChartData extends Component {
               <header>
               <h2>Top Champions in 20 Games</h2>
               </header>
-                {this.state.chartData ? 
+                {this.state.chartData !== {} ? 
                 <Bar
                   data={this.state.chartData}
                   width={100}
@@ -275,7 +275,7 @@ class ChartData extends Component {
               <h2>Top Game Modes Played</h2>
               </header>
               <div className="chart-container">
-                {this.state.queueData ? <Pie
+                {this.state.queueData !== {} ? <Pie
                   data={this.state.queueData}
                   width={100}
                   height={100}
@@ -299,7 +299,7 @@ class ChartData extends Component {
               <h2>Total Champion Roles</h2>
               </header>
               <div className="chart-container">
-              {this.state.queueData ? 
+              {this.state.queueData !== {}? 
                 <Pie
                   data={this.state.pieData}
                   width={100}
