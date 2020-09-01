@@ -99,7 +99,7 @@ class SummonerRank extends Component {
             </div>
           ) : (
             <h2>
-              User has not played any ranked games recently!
+              User has not played any ranked games yet!
             </h2>
           )}
           </Media>

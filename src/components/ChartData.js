@@ -3,7 +3,12 @@ import {Bar,Line,Pie} from 'react-chartjs-2';
 import ChartStyles from './styles/ChartsStyles';
 import  Section  from '../style/Section';
 
-
+//450 - aram
+//900 - urf
+//440 - ranked flex
+//420 - ranked solo/duo
+//1300 - blind pick
+//400 - normal draft 
 
 class ChartData extends Component {
     constructor(props) {
@@ -16,7 +21,8 @@ class ChartData extends Component {
             chartData: {},
             championLibrary: {},
             championList:[],
-            pieData: {}
+            pieData: {},
+            queueData: {}
         }
     }
 
@@ -26,6 +32,7 @@ class ChartData extends Component {
 
     getMatchHistory = () => {
         let championList = [];
+        let queueObj = {};
         const proxyurl = "https://mysterious-wave-96239.herokuapp.com/";
         const url = "https://na1.api.riotgames.com/lol/match/v4/matchlists/by-account/" + this.state.accountId + "?endIndex=20&api_key=" +process.env.REACT_APP_SECRET_KEY;
         fetch(proxyurl + url)
@@ -39,6 +46,47 @@ class ChartData extends Component {
                     )
                 }
                 )
+                Object.entries(result.matches).map(([x,championId]) => {
+                  if(championId.queue === 450) {
+                    if(queueObj.ARAM === undefined) {
+                      queueObj.ARAM = 1
+                    } else if (queueObj.ARAM !== undefined) {
+                      queueObj.ARAM += 1
+                    }
+                  } else if(championId.queue === 900) {
+                    if(queueObj.URF === undefined) {
+                      queueObj.URF = 1
+                    } else if (queueObj.URF !== undefined) {
+                      queueObj.URF += 1
+                    }
+                  } else if(championId.queue === 440) {
+                    if(queueObj["Ranked Flex"] === undefined) {
+                      queueObj["Ranked Flex"] = 1
+                    } else if (queueObj["Ranked Flex"] !== undefined) {
+                      queueObj["Ranked Flex"] += 1
+                    }
+                  } else if(championId.queue === 420) {
+                    if(queueObj["Ranked Solo/Duo"] === undefined) {
+                      queueObj["Ranked Solo/Duo"] = 1
+                    } else if (queueObj["Ranked Solo/Duo"] !== undefined) {
+                      queueObj["Ranked Solo/Duo"] += 1
+                    }
+                  } else if(championId.queue === 1300) {
+                    if(queueObj["Blind Pick"] === undefined) {
+                      queueObj["Blind Pick"] = 1
+                    } else if (queueObj["Blind Pick"] !== undefined) {
+                      queueObj["Blind Pick"] += 1
+                    }
+                  } else if(championId.queue === 400) {
+                    if(queueObj["Normal Draft"] === undefined) {
+                      queueObj["Normal Draft"] = 1
+                    } else if (queueObj["Normal Draft"] !== undefined) {
+                      queueObj["Normal Draft"] += 1
+                    }
+                  }
+                })
+                console.log(queueObj)
+                this.getQueueChart(queueObj)
                 this.getHeroJson(championList)
                 this.setState({
                   championList: championList
@@ -58,7 +106,7 @@ class ChartData extends Component {
 
     getHeroJson = (championList) => {
       let championObj = {}
-      let roleObj = {}
+      let roleObj = {};
       const proxyurl = "https://mysterious-wave-96239.herokuapp.com/";
         const url = "https://ddragon.leagueoflegends.com/cdn/10.15.1/data/en_US/champion.json";
           fetch(proxyurl + url) 
@@ -104,6 +152,30 @@ class ChartData extends Component {
         });
       }
     }
+
+    getQueueChart = (queueObj) => {
+      {
+        this.setState({
+          queueData:{
+            labels: Object.keys(queueObj),
+            datasets:[
+              {
+                label:'Games Played',
+                data: Object.values(queueObj),
+                backgroundColor:[
+                  'rgba(255, 99, 132, 0.6)',
+                  'rgba(54, 162, 235, 0.6)',
+                  'rgba(255, 206, 86, 0.6)',
+                  'rgba(75, 192, 192, 0.6)',
+                  'rgba(153, 102, 255, 0.6)',
+                  'rgba(255, 159, 64, 0.6)'
+                ]
+              }
+            ]
+          }
+        });
+      }
+    }
  
     matchHeroes = (championObj, championList) => {
       let obj = {}
@@ -128,7 +200,7 @@ class ChartData extends Component {
             labels: Object.keys(obj),
             datasets:[
               {
-                label:'Population',
+                label:'Count',
                 data: Object.values(obj),
                 backgroundColor:[
                   'rgba(255, 99, 132, 0.6)',
@@ -201,22 +273,15 @@ class ChartData extends Component {
 
               <div className="chart">
               <header>
-              <h2>Top Champs in 20 Games</h2>
+              <h2>Top Game Modes Played</h2>
               </header>
               <div className="chart-container">
-                <Line
-                  data={this.state.chartData}
+                <Pie
+                  data={this.state.queueData}
                   width={100}
                   height={100}
                   options={{
-                    scales: {
-                      yAxes: [{
-                        ticks: {
-                          beginAtZero: true,
-                          callback: function (value) { if (Number.isInteger(value)) { return value; } }
-                        }
-                      }]
-                    },
+                    
                     title: {
                       display: this.props.displayTitle,
                       fontSize: 25
