@@ -85,7 +85,6 @@ class ChartData extends Component {
                     }
                   }
                 })
-                console.log(queueObj)
                 this.getQueueChart(queueObj)
                 this.getHeroJson(championList)
                 this.setState({
@@ -122,7 +121,6 @@ class ChartData extends Component {
                       roleObj[value.tags[0]] += 1 
                     }
                   })
-                  console.log(roleObj)
                   this.getPieChartData(roleObj)
                   this.matchHeroes(championObj, championList)
             })
