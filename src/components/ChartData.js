@@ -43,57 +43,59 @@ class ChartData extends Component {
         .then(
             (result) => {
                 this.setState({
-                    isLoaded: true,
-                    matchHistory: Object.entries(result.matches).map(([x,championId]) => 
-                       championList.push(championId.champion.toString())
-                    )
+                  isLoaded: true
                 }
                 )
-                Object.entries(result.matches).map(([x,championId]) => {
-                  if(championId.queue === 450) {
-                    if(queueObj.ARAM === undefined) {
-                      queueObj.ARAM = 1
-                    } else if (queueObj.ARAM !== undefined) {
-                      queueObj.ARAM += 1
+                if(result.matches) {
+                  Object.entries(result.matches).map(([x,championId]) => 
+                  championList.push(championId.champion.toString())
+                  )
+                  Object.entries(result.matches).map(([x,championId]) => {
+                    if(championId.queue === 450) {
+                      if(queueObj.ARAM === undefined) {
+                        queueObj.ARAM = 1
+                      } else if (queueObj.ARAM !== undefined) {
+                        queueObj.ARAM += 1
+                      }
+                    } else if(championId.queue === 900) {
+                      if(queueObj.URF === undefined) {
+                        queueObj.URF = 1
+                      } else if (queueObj.URF !== undefined) {
+                        queueObj.URF += 1
+                      }
+                    } else if(championId.queue === 440) {
+                      if(queueObj["Ranked Flex"] === undefined) {
+                        queueObj["Ranked Flex"] = 1
+                      } else if (queueObj["Ranked Flex"] !== undefined) {
+                        queueObj["Ranked Flex"] += 1
+                      }
+                    } else if(championId.queue === 420) {
+                      if(queueObj["Ranked Solo/Duo"] === undefined) {
+                        queueObj["Ranked Solo/Duo"] = 1
+                      } else if (queueObj["Ranked Solo/Duo"] !== undefined) {
+                        queueObj["Ranked Solo/Duo"] += 1
+                      }
+                    } else if(championId.queue === 1300) {
+                      if(queueObj["Blind Pick"] === undefined) {
+                        queueObj["Blind Pick"] = 1
+                      } else if (queueObj["Blind Pick"] !== undefined) {
+                        queueObj["Blind Pick"] += 1
+                      }
+                    } else if(championId.queue === 400) {
+                      if(queueObj["Normal Draft"] === undefined) {
+                        queueObj["Normal Draft"] = 1
+                      } else if (queueObj["Normal Draft"] !== undefined) {
+                        queueObj["Normal Draft"] += 1
+                      }
                     }
-                  } else if(championId.queue === 900) {
-                    if(queueObj.URF === undefined) {
-                      queueObj.URF = 1
-                    } else if (queueObj.URF !== undefined) {
-                      queueObj.URF += 1
-                    }
-                  } else if(championId.queue === 440) {
-                    if(queueObj["Ranked Flex"] === undefined) {
-                      queueObj["Ranked Flex"] = 1
-                    } else if (queueObj["Ranked Flex"] !== undefined) {
-                      queueObj["Ranked Flex"] += 1
-                    }
-                  } else if(championId.queue === 420) {
-                    if(queueObj["Ranked Solo/Duo"] === undefined) {
-                      queueObj["Ranked Solo/Duo"] = 1
-                    } else if (queueObj["Ranked Solo/Duo"] !== undefined) {
-                      queueObj["Ranked Solo/Duo"] += 1
-                    }
-                  } else if(championId.queue === 1300) {
-                    if(queueObj["Blind Pick"] === undefined) {
-                      queueObj["Blind Pick"] = 1
-                    } else if (queueObj["Blind Pick"] !== undefined) {
-                      queueObj["Blind Pick"] += 1
-                    }
-                  } else if(championId.queue === 400) {
-                    if(queueObj["Normal Draft"] === undefined) {
-                      queueObj["Normal Draft"] = 1
-                    } else if (queueObj["Normal Draft"] !== undefined) {
-                      queueObj["Normal Draft"] += 1
-                    }
-                  }
-                  return queueObj
-                })
-                this.getQueueChart(queueObj)
-                this.getHeroJson(championList)
-                this.setState({
-                  championList: championList
-                })
+                    return queueObj
+                  })
+                  this.getQueueChart(queueObj)
+                  this.getHeroJson(championList)
+                  this.setState({
+                    championList: championList
+                  })
+                }
             },
             (error) => {
                 this.setState({
