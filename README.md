@@ -1,3 +1,5 @@
+Note for jabinx92 - 'npm run build' + 'firebase deploy' = deploys current version to google firebase
+
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
 ## Available Scripts
