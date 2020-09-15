@@ -31,7 +31,7 @@ class FindSummoner extends Component {
     async componentDidMount() {
     const proxyurl = "https://mysterious-wave-96239.herokuapp.com/";
     const url = "https://na1.api.riotgames.com/lol/summoner/v4/summoners/by-name/" + this.state.username + "?api_key=" + process.env.REACT_APP_SECRET_KEY; // site that doesn’t send Access-Control-*
-      await fetch(proxyurl + url) // https://cors-anywhere.herokuapp.com/https://na1.api.riotgames.com/lol/summoner/v4/summoners/by-name/
+      await fetch(proxyurl + url) // https://mysterious-wave-96239.herokuapp.com/https://na1.api.riotgames.com/lol/summoner/v4/summoners/by-name/
         .then(res => res.json())
         .then(
           (result) => {
