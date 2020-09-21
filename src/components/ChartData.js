@@ -4,6 +4,7 @@ import {Bar
   ,Pie} from 'react-chartjs-2';
 import ChartStyles from './styles/ChartsStyles';
 import  Section  from '../style/Section';
+import TopChampMaps from '../components/TopChampMaps'
 
 //450 - aram
 //900 - urf
@@ -24,7 +25,17 @@ class ChartData extends Component {
             championLibrary: {},
             championList:[],
             pieData: {},
-            queueData: {}
+            queueData: {},
+            championData: [{
+              id: 168088328,
+              html_url: "https://github.com/bchiang7/Advanced-React",
+              name: "Advanced-React",
+              description: "Starter Files and Solutions for Full Stack Advanced React and GraphQL ",
+              language: "JavaScript",
+              stargazers_count: 3,
+              forks: 3,
+              size: 5132
+            }]
         }
     }
 
@@ -325,6 +336,9 @@ class ChartData extends Component {
                   }}
                 /> : <h3>Nothing to show!</h3> }
               </div>
+              {/* { this.state.championData ?
+              <TopChampMaps repoData={this.state.championData} /> : null
+              } */}
               </div>
             </ChartStyles>
           </Section>
