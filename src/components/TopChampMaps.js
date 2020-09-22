@@ -1,14 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
-import Repo from '@primer/octicons-react';
-import Star from '@primer/octicons-react';
-import RepoForked from '@primer/octicons-react';
-import TriangleDown from '@primer/octicons-react';
+import Octicon, { Repo, Star, RepoForked, TriangleDown } from "@githubprimer/octicons-react";
 import FlipMove from 'react-flip-move';
-import langColors from '../utils/langColors';
+import  langColors  from '../utils/langColors';
 import ReposStyles from './styles/ReposStyles';
 import DropdownStyles from './styles/DropdownStyles';
-import Section from '../style/Section';
+import  Section  from '../style/Section';
 
 const Repos = ({ repoData }) => {
   const [topRepos, setTopRepos] = useState([]);
@@ -27,7 +24,6 @@ const Repos = ({ repoData }) => {
       .filter(repo => !repo.fork)
       .sort((a, b) => b[sortProperty] - a[sortProperty])
       .slice(0, LIMIT);
-
     setTopRepos(sorted);
   };
 
@@ -35,9 +31,9 @@ const Repos = ({ repoData }) => {
     if (repoData.length) {
       getTopRepos();
     }
-  });
+  }, []);
 
-  useEffect(() => getTopRepos(sortType));
+  useEffect(() => getTopRepos(sortType), [sortType]);
 
   const toggleDropdown = () => setDropdownOpen(!dropdownOpen);
 
@@ -52,13 +48,13 @@ const Repos = ({ repoData }) => {
     <Section>
       <ReposStyles>
         <header>
-          <h2>Top Champions</h2>
+          <h2>Top Repos</h2>
           <div className="dropdown-wrapper">
             <span className="label">by</span>
             <DropdownStyles active={dropdownOpen}>
               <button className="dropdown__button" onClick={() => toggleDropdown()}>
                 <label>{sortType}</label>
-                <TriangleDown />
+                <Octicon icon={TriangleDown} />
               </button>
               <ul className="dropdown__list">
                 {sortTypes.map((type, i) => (
@@ -83,7 +79,7 @@ const Repos = ({ repoData }) => {
                     className="repo">
                     <div className="repo__top">
                       <div className="repo__name">
-                        <Repo />
+                        <Octicon icon={Repo} />
                         <h3>{repo.name}</h3>
                       </div>
                       <p>{repo.description}</p>
@@ -98,11 +94,11 @@ const Repos = ({ repoData }) => {
                           {repo.language}
                         </span>
                         <span>
-                          <Star />
+                          <Octicon icon={Star} />
                           {repo.stargazers_count.toLocaleString()}
                         </span>
                         <span>
-                          <RepoForked />
+                          <Octicon icon={RepoForked} />
                           {repo.forks.toLocaleString()}
                         </span>
                       </div>

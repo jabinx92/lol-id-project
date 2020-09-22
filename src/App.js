@@ -3,6 +3,7 @@ import EnterName from './components/EnterName';
 import MainPage from './components/MainPage';
 import FindSummoner from './components/FindSummoner';
 import Chart from './components/Chart'
+import TopChampMaps from './components/TopChampMaps'
 
 
 class App extends Component {
@@ -11,7 +12,17 @@ class App extends Component {
     
     this.state = {
       username: '',
-      redirectToReferrer: false
+      redirectToReferrer: false,
+      repoData: [{
+        id: 23123123,
+        name: "Advanced-React",
+        html_url: "https://github.com/bchiang7/Advanced-React",
+        description: "Starter Files and Solutions for Full Stack Advanced React and GraphQL ",
+        language: "JavaScript",
+        stargazers_count: 3,
+        forks: 3,
+        size: 5132
+      }]
     }
   }
 
@@ -32,6 +43,8 @@ class App extends Component {
           <div>
             <FindSummoner username={this.state.username}/>
             <Chart username={this.state.username} legendPosition="bottom" displayTitle="true" />
+
+            <TopChampMaps repoData={this.state.repoData} />
 
             <MainPage username={this.state.username}/>
           </div>

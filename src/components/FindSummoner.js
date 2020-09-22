@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import SummonerRank from './SummonerRank'
 import { Image, Media } from 'react-bootstrap';
-import Octicon, { Rocket, Location } from '@githubprimer/octicons-react';
+import Octicon, {Rocket,Location} from '@githubprimer/octicons-react';
 
 import UserInfoStyles from './styles/UserInfoStyles';
 import Section from '../style/Section';

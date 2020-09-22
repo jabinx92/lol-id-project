@@ -4,7 +4,7 @@ import {Bar
   ,Pie} from 'react-chartjs-2';
 import ChartStyles from './styles/ChartsStyles';
 import  Section  from '../style/Section';
-import TopChampMaps from '../components/TopChampMaps'
+import TopChampMaps from './TopChampMaps';
 
 //450 - aram
 //900 - urf
@@ -26,16 +26,17 @@ class ChartData extends Component {
             championList:[],
             pieData: {},
             queueData: {},
-            championData: [{
-              id: 168088328,
-              html_url: "https://github.com/bchiang7/Advanced-React",
-              name: "Advanced-React",
-              description: "Starter Files and Solutions for Full Stack Advanced React and GraphQL ",
-              language: "JavaScript",
-              stargazers_count: 3,
-              forks: 3,
-              size: 5132
-            }]
+            championJSON: null,
+            repoData: [{
+        id: 23123123,
+        name: "Advanced-React",
+        html_url: "https://github.com/bchiang7/Advanced-React",
+        description: "Starter Files and Solutions for Full Stack Advanced React and GraphQL ",
+        language: "JavaScript",
+        stargazers_count: 3,
+        forks: 3,
+        size: 5132
+      }]
         }
     }
 
@@ -128,6 +129,8 @@ class ChartData extends Component {
           fetch(proxyurl + url) 
             .then(response => response.json())
             .then(contents => {
+                  this.state.championJSON = contents
+                  console.log(this.state.championJSON)
                   Object.entries(contents.data).map(([key, value]) => 
                     championObj[value.key] = [value.name].toString()
                   )
@@ -146,7 +149,6 @@ class ChartData extends Component {
     }
 
     getPieChartData = (roleObj) => {
-      console.log(roleObj)
         this.setState({
           pieData:{
             labels: Object.keys(roleObj),
@@ -207,7 +209,8 @@ class ChartData extends Component {
       }
     }
     //return the object
-    return this.getChartData(obj)
+    this.getChartData(obj)
+    console.log(obj)
     }
 
 
@@ -255,6 +258,8 @@ class ChartData extends Component {
     
     render () {
         return (
+          <div>
+
           <Section>
             <ChartStyles>
               <div className="chart">
@@ -264,27 +269,27 @@ class ChartData extends Component {
               </header>
                 {this.state.accountId ? 
                 <Bar
-                  data={this.state.chartData}
-                  width={100}
-                  height={100}
-                  options={{
-                    scales: {
-                      yAxes: [{
-                        ticks: {
-                          beginAtZero: true,
-                          callback: function (value) { if (Number.isInteger(value)) { return value; } }
-                        }
-                      }]
-                    },
-                    title: {
-                      display: this.props.displayTitle,
-                      fontSize: 25
-                    },
-                    legend: {
-                      display: this.props.displayLegend,
-                      position: this.props.legendPosition
-                    }
-                  }}
+                data={this.state.chartData}
+                width={100}
+                height={100}
+                options={{
+                  scales: {
+                    yAxes: [{
+                      ticks: {
+                        beginAtZero: true,
+                        callback: function (value) { if (Number.isInteger(value)) { return value; } }
+                      }
+                    }]
+                  },
+                  title: {
+                    display: this.props.displayTitle,
+                    fontSize: 25
+                  },
+                  legend: {
+                    display: this.props.displayLegend,
+                    position: this.props.legendPosition
+                  }
+                }}
                 /> : <h3>Nothing to show!</h3>}
               </div>
               </div>
@@ -296,19 +301,29 @@ class ChartData extends Component {
               <div className="chart-container">
                 {this.state.accountId ? 
                 <Pie
-                  data={this.state.queueData}
-                  width={100}
-                  height={100}
-                  options={{
-                    title: {
-                      display: this.props.displayTitle,
-                      fontSize: 25
-                    },
-                    legend: {
-                      display: true,
-                      position: 'right'
-                    }
-                  }}
+                data={this.state.queueData}
+                width={100}
+                height={100}
+                options={{
+                  title: {
+                    display: this.props.displayTitle,
+                    fontSize: 25
+                  },
+                  legend: {
+                    display: true,
+                    position: 'right'
+                  },
+                  repoData: [{
+                    id: 23123123,
+                    name: "Advanced-React",
+                    html_url: "https://github.com/bchiang7/Advanced-React",
+                    description: "Starter Files and Solutions for Full Stack Advanced React and GraphQL ",
+                    language: "JavaScript",
+                    stargazers_count: 3,
+                    forks: 3,
+                    size: 5132
+                  }]
+                }}
                 />: <h3>Nothing to show!</h3>}
               </div>
               </div>
@@ -320,28 +335,27 @@ class ChartData extends Component {
               <div className="chart-container">
               {this.state.accountId ?  
                 <Pie
-                  data={this.state.pieData}
-                  width={100}
-                  height={100}
-                  options={{
-                    scales: {
-                    },
-                    title: {
-                      display: true
-                    },
-                    legend: {
-                      display: true,
-                      position: 'right'
-                    }
-                  }}
+                data={this.state.pieData}
+                width={100}
+                height={100}
+                options={{
+                  scales: {
+                  },
+                  title: {
+                    display: true
+                  },
+                  legend: {
+                    display: true,
+                    position: 'right'
+                  }
+                }}
                 /> : <h3>Nothing to show!</h3> }
               </div>
-              {/* { this.state.championData ?
-              <TopChampMaps repoData={this.state.championData} /> : null
-              } */}
               </div>
             </ChartStyles>
           </Section>
+          {this.state.repoData ? <TopChampMaps repoData={this.state.repoData}/> : 'Loading'}
+        </div>
         )
     }
 }
