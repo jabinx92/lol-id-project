@@ -27,16 +27,7 @@ class ChartData extends Component {
             pieData: {},
             queueData: {},
             championJSON: null,
-            repoData: [{
-        id: 23123123,
-        name: "Advanced-React",
-        html_url: "https://github.com/bchiang7/Advanced-React",
-        description: "Starter Files and Solutions for Full Stack Advanced React and GraphQL ",
-        language: "JavaScript",
-        stargazers_count: 3,
-        forks: 3,
-        size: 5132
-      }]
+            repoData: null
         }
     }
 
@@ -129,7 +120,7 @@ class ChartData extends Component {
           fetch(proxyurl + url) 
             .then(response => response.json())
             .then(contents => {
-                  this.state.championJSON = contents
+                  this.setState({championJSON : contents})
                   console.log(this.state.championJSON)
                   Object.entries(contents.data).map(([key, value]) => 
                     championObj[value.key] = [value.name].toString()
@@ -210,6 +201,7 @@ class ChartData extends Component {
     }
     //return the object
     this.getChartData(obj)
+    this.getMappedHeroes(obj)
     console.log(obj)
     }
 
@@ -248,6 +240,31 @@ class ChartData extends Component {
             ]
           }
         });
+      }
+
+      getMappedHeroes = (obj) => {
+        let emptyArray = [];
+        for(var key in obj) {
+          console.log(key)
+          console.log(this.state.championJSON.data[key])
+          if(this.state.championJSON.data[key]) {
+          emptyArray.push({
+          id: this.state.championJSON.data[key].key,
+          name: this.state.championJSON.data[key].id,
+          html_url: `https://na.leagueoflegends.com/en-us/champions/${key}/`,
+          description: this.state.championJSON.data[key].title,
+          language: this.state.championJSON.data[key].tags[0],
+          stargazers_count: this.state.championJSON.data[key].info.attack,
+          forks: this.state.championJSON.data[key].info.defense,
+          size: this.state.championJSON.data[key].info.difficulty
+        })
+        }
+        }
+        console.log(emptyArray)
+        return this.setState({
+          repoData: emptyArray
+        });
+
       }
 
     static defaultProps = {
@@ -354,7 +371,7 @@ class ChartData extends Component {
               </div>
             </ChartStyles>
           </Section>
-          {this.state.repoData ? <TopChampMaps repoData={this.state.repoData}/> : 'Loading'}
+          {this.state.repoData ? <TopChampMaps repoData={this.state.repoData}/> : ''}
         </div>
         )
     }

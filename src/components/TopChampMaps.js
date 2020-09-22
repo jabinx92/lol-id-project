@@ -48,7 +48,7 @@ const Repos = ({ repoData }) => {
     <Section>
       <ReposStyles>
         <header>
-          <h2>Top Repos</h2>
+          <h2>Top Champions</h2>
           <div className="dropdown-wrapper">
             <span className="label">by</span>
             <DropdownStyles active={dropdownOpen}>
