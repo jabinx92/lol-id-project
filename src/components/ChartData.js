@@ -251,7 +251,7 @@ class ChartData extends Component {
           emptyArray.push({
           id: this.state.championJSON.data[key].key,
           name: this.state.championJSON.data[key].id,
-          html_url: `https://na.leagueoflegends.com/en-us/champions/${key}/`,
+          html_url: `https://na.leagueoflegends.com/en-us/champions/${key.toLowerCase()}/`,
           description: this.state.championJSON.data[key].title,
           language: this.state.championJSON.data[key].tags[0],
           stargazers_count: this.state.championJSON.data[key].info.attack,

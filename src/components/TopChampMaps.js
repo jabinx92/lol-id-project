@@ -111,7 +111,7 @@ const Repos = ({ repoData }) => {
               ))}
             </FlipMove>
           ) : (
-            <p>No available repositories!</p>
+            <p>No available information!</p>
           )}
         </div>
       </ReposStyles>
