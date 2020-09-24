@@ -33,7 +33,7 @@ class App extends Component {
           <div>
             <FindSummoner username={this.state.username}/>
             <Chart username={this.state.username} legendPosition="bottom" displayTitle="true" />
-
+            
             <Footer />
           </div>
         )}
