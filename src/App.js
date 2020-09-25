@@ -1,10 +1,7 @@
 import React, { Component } from 'react';
 import EnterName from './components/EnterName';
-import Footer from './components/Footer';
 import FindSummoner from './components/FindSummoner';
 import Chart from './components/Chart'
-import TopChampMaps from './components/TopChampMaps'
-
 
 class App extends Component {
   constructor(props) {
@@ -33,8 +30,6 @@ class App extends Component {
           <div>
             <FindSummoner username={this.state.username}/>
             <Chart username={this.state.username} legendPosition="bottom" displayTitle="true" />
-            
-            <Footer />
           </div>
         )}
       </div>

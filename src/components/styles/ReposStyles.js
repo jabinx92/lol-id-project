@@ -17,6 +17,7 @@ const ReposStyles = styled.div`
   }
   .repo-list {
     ul {
+      list-style-type: none;
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
       grid-gap: 1rem;

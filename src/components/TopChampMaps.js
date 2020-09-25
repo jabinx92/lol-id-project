@@ -1,23 +1,25 @@
 import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
-import Octicon, { Repo, Star, RepoForked, TriangleDown } from "@githubprimer/octicons-react";
+import { GiBroadsword,GiCheckedShield, GiOverlordHelm } from 'react-icons/gi'
+import Octicon, { TriangleDown } from "@githubprimer/octicons-react";
 import FlipMove from 'react-flip-move';
 import  langColors  from '../utils/langColors';
 import ReposStyles from './styles/ReposStyles';
 import DropdownStyles from './styles/DropdownStyles';
 import  Section  from '../style/Section';
+import {useCallback} from 'react'
 
 const Repos = ({ repoData }) => {
   const [topRepos, setTopRepos] = useState([]);
-  const [sortType, setSortType] = useState('stars');
+  const [sortType, setSortType] = useState('attack');
   const [dropdownOpen, setDropdownOpen] = useState(false);
 
-  const getTopRepos = type => {
+  const getTopRepos = useCallback((type) => {
     const LIMIT = 8;
     const map = {
-      stars: 'stargazers_count',
-      forks: 'forks_count',
-      size: 'size',
+      attack: 'stargazers_count',
+      defense: 'forks_count',
+      difficulty: 'size',
     };
     const sortProperty = map[type];
     const sorted = repoData
@@ -25,15 +27,15 @@ const Repos = ({ repoData }) => {
       .sort((a, b) => b[sortProperty] - a[sortProperty])
       .slice(0, LIMIT);
     setTopRepos(sorted);
-  };
+  }, [repoData]);
 
   useEffect(() => {
     if (repoData.length) {
       getTopRepos();
     }
-  }, []);
+  }, [repoData.length, getTopRepos]);
 
-  useEffect(() => getTopRepos(sortType), [sortType]);
+  useEffect(() => getTopRepos(sortType), [sortType, getTopRepos]);
 
   const toggleDropdown = () => setDropdownOpen(!dropdownOpen);
 
@@ -42,7 +44,7 @@ const Repos = ({ repoData }) => {
     toggleDropdown();
   };
 
-  const sortTypes = ['stars', 'forks', 'size'];
+  const sortTypes = ['attack', 'defense', 'difficulty'];
 
   return (
     <Section>
@@ -79,7 +81,7 @@ const Repos = ({ repoData }) => {
                     className="repo">
                     <div className="repo__top">
                       <div className="repo__name">
-                        <Octicon icon={Repo} />
+                        <GiOverlordHelm />
                         <h3>{repo.name}</h3>
                       </div>
                       <p>{repo.description}</p>
@@ -94,16 +96,16 @@ const Repos = ({ repoData }) => {
                           {repo.language}
                         </span>
                         <span>
-                          <Octicon icon={Star} />
+                          <GiBroadsword title="Damage"/>
                           {repo.stargazers_count.toLocaleString()}
                         </span>
                         <span>
-                          <Octicon icon={RepoForked} />
+                          <GiCheckedShield />
                           {repo.forks.toLocaleString()}
                         </span>
                       </div>
                       <div className="repo__stats--right">
-                        <span>{repo.size.toLocaleString()} KB</span>
+                        <span>Difficulty: {repo.size.toLocaleString()}</span>
                       </div>
                     </div>
                   </a>

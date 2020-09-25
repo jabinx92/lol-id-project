@@ -38,9 +38,10 @@ const DropdownStyles = styled.div`
     }
   }
   .dropdown__list {
+    list-style-type: none;
     position: absolute;
     overflow: hidden;
-    width: 100%;
+    width: 110%;
     z-index: 2;
     transition: ${theme.transition};
     box-shadow: 0 5px 30px -15px rgba(0, 0, 0, 0.2);

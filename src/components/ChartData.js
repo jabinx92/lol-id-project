@@ -5,6 +5,7 @@ import {Bar
 import ChartStyles from './styles/ChartsStyles';
 import  Section  from '../style/Section';
 import TopChampMaps from './TopChampMaps';
+import Footer from './Footer'
 
 //450 - aram
 //900 - urf
@@ -40,7 +41,8 @@ class ChartData extends Component {
         let queueObj = {};
         if(!this.state.accountId) {return}
         const proxyurl = "https://mysterious-wave-96239.herokuapp.com/";
-        const url = "https://na1.api.riotgames.com/lol/match/v4/matchlists/by-account/" + this.state.accountId + "?endIndex=20&api_key=" +process.env.REACT_APP_SECRET_KEY;
+        const url = "https://na1.api.riotgames.com/lol/match/v4/matchlists/by-account/" + this.state.accountId + "?endIndex=20&api_key=RGAPI-031ffc06-01a2-4696-9e40-235d76f08cc1" 
+        // +process.env.REACT_APP_SECRET_KEY;
         fetch(proxyurl + url)
         .then(res => res.json())
         .then(
@@ -121,7 +123,6 @@ class ChartData extends Component {
             .then(response => response.json())
             .then(contents => {
                   this.setState({championJSON : contents})
-                  console.log(this.state.championJSON)
                   Object.entries(contents.data).map(([key, value]) => 
                     championObj[value.key] = [value.name].toString()
                   )
@@ -202,7 +203,6 @@ class ChartData extends Component {
     //return the object
     this.getChartData(obj)
     this.getMappedHeroes(obj)
-    console.log(obj)
     }
 
 
@@ -245,22 +245,19 @@ class ChartData extends Component {
       getMappedHeroes = (obj) => {
         let emptyArray = [];
         for(var key in obj) {
-          console.log(key)
-          console.log(this.state.championJSON.data[key])
           if(this.state.championJSON.data[key]) {
           emptyArray.push({
-          id: this.state.championJSON.data[key].key,
-          name: this.state.championJSON.data[key].id,
-          html_url: `https://na.leagueoflegends.com/en-us/champions/${key.toLowerCase()}/`,
-          description: this.state.championJSON.data[key].title,
-          language: this.state.championJSON.data[key].tags[0],
-          stargazers_count: this.state.championJSON.data[key].info.attack,
-          forks: this.state.championJSON.data[key].info.defense,
-          size: this.state.championJSON.data[key].info.difficulty
-        })
+            id: this.state.championJSON.data[key].key,
+            name: this.state.championJSON.data[key].id,
+            html_url: `https://na.leagueoflegends.com/en-us/champions/${key.toLowerCase()}/`,
+            description: this.state.championJSON.data[key].title,
+            language: this.state.championJSON.data[key].tags[0],
+            stargazers_count: this.state.championJSON.data[key].info.attack,
+            forks: this.state.championJSON.data[key].info.defense,
+            size: this.state.championJSON.data[key].info.difficulty
+          })
+          }
         }
-        }
-        console.log(emptyArray)
         return this.setState({
           repoData: emptyArray
         });
@@ -372,6 +369,8 @@ class ChartData extends Component {
             </ChartStyles>
           </Section>
           {this.state.repoData ? <TopChampMaps repoData={this.state.repoData}/> : ''}
+          {this.state.repoData ? <Footer /> : ''}
+
         </div>
         )
     }

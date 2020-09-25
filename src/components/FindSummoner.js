@@ -11,6 +11,7 @@ import Corner from './Corner'
 
 
 
+
 class FindSummoner extends Component {
     constructor(props) {
       super(props);
@@ -28,10 +29,11 @@ class FindSummoner extends Component {
       };
     }
     
-    async componentDidMount() {
+    componentDidMount() {
     const proxyurl = "https://mysterious-wave-96239.herokuapp.com/";
-    const url = "https://na1.api.riotgames.com/lol/summoner/v4/summoners/by-name/" + this.state.username + "?api_key=" + process.env.REACT_APP_SECRET_KEY; // site that doesn’t send Access-Control-*
-      await fetch(proxyurl + url) // https://mysterious-wave-96239.herokuapp.com/https://na1.api.riotgames.com/lol/summoner/v4/summoners/by-name/
+    const url = "https://na1.api.riotgames.com/lol/summoner/v4/summoners/by-name/" + this.state.username + "?api_key=RGAPI-031ffc06-01a2-4696-9e40-235d76f08cc1"
+    //  + process.env.REACT_APP_SECRET_KEY; // site that doesn’t send Access-Control-*
+      fetch(proxyurl + url) // https://mysterious-wave-96239.herokuapp.com/https://na1.api.riotgames.com/lol/summoner/v4/summoners/by-name/
         .then(res => res.json())
         .then(
           (result) => {
@@ -99,9 +101,10 @@ class FindSummoner extends Component {
                 </div>
 
               <SummonerRank id={id}/>
-
               </Media.Body>
           </UserInfoStyles>
+          
+
           ) : (
             <UserInfoStyles>
             <Corner />
