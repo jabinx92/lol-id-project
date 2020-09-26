@@ -9,9 +9,6 @@ import Corner from './Corner'
 
 
 
-
-
-
 class FindSummoner extends Component {
     constructor(props) {
       super(props);
@@ -121,4 +118,4 @@ class FindSummoner extends Component {
 }
 export default FindSummoner;
 
-//psuh test test
+//psuh test
