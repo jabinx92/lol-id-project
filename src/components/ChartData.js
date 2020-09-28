@@ -252,9 +252,9 @@ class ChartData extends Component {
             html_url: `https://na.leagueoflegends.com/en-us/champions/${key.toLowerCase()}/`,
             description: this.state.championJSON.data[key].title,
             language: this.state.championJSON.data[key].tags[0],
-            stargazers_count: this.state.championJSON.data[key].info.attack,
-            forks: this.state.championJSON.data[key].info.defense,
-            size: this.state.championJSON.data[key].info.difficulty
+            attack: this.state.championJSON.data[key].info.attack,
+            defense: this.state.championJSON.data[key].info.defense,
+            difficulty: this.state.championJSON.data[key].info.difficulty
           })
           }
         }
@@ -326,17 +326,7 @@ class ChartData extends Component {
                   legend: {
                     display: true,
                     position: 'right'
-                  },
-                  repoData: [{
-                    id: 23123123,
-                    name: "Advanced-React",
-                    html_url: "https://github.com/bchiang7/Advanced-React",
-                    description: "Starter Files and Solutions for Full Stack Advanced React and GraphQL ",
-                    language: "JavaScript",
-                    stargazers_count: 3,
-                    forks: 3,
-                    size: 5132
-                  }]
+                  }
                 }}
                 />: <h3>Nothing to show!</h3>}
               </div>

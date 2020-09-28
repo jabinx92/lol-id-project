@@ -17,9 +17,9 @@ const Repos = ({ repoData }) => {
   const getTopRepos = useCallback((type) => {
     const LIMIT = 8;
     const map = {
-      attack: 'stargazers_count',
-      defense: 'forks_count',
-      difficulty: 'size',
+      attack: 'attack',
+      defense: 'defense',
+      difficulty: 'difficulty',
     };
     const sortProperty = map[type];
     const sorted = repoData
@@ -97,15 +97,15 @@ const Repos = ({ repoData }) => {
                         </span>
                         <span>
                           <GiBroadsword title="Damage"/>
-                          {repo.stargazers_count.toLocaleString()}
+                          {repo.attack.toLocaleString()}
                         </span>
                         <span>
                           <GiCheckedShield />
-                          {repo.forks.toLocaleString()}
+                          {repo.defense.toLocaleString()}
                         </span>
                       </div>
                       <div className="repo__stats--right">
-                        <span>Difficulty: {repo.size.toLocaleString()}</span>
+                        <span>Difficulty: {repo.difficulty.toLocaleString()}</span>
                       </div>
                     </div>
                   </a>

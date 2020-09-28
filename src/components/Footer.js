@@ -33,10 +33,6 @@ const Footer = () => (
   <StyledFooter>
     <div>
       <span>Built with</span>
-      <a href="https://nextjs.org/" target="_blank" rel="noopener noreferrer">
-        Next.js
-      </a>
-      &middot;
       <a href="https://www.chartjs.org/" target="_blank" rel="noopener noreferrer">
         Chart.js
       </a>
