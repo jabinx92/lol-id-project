@@ -14,11 +14,11 @@ class SummonerRank extends Component {
     
   
     componentDidMount() {
-    const proxyurl = "https://mysterious-wave-96239.herokuapp.com/";
-    const url = "https://na1.api.riotgames.com/lol/league/v4/entries/by-summoner/" + this.state.id + "?api_key=RGAPI-031ffc06-01a2-4696-9e40-235d76f08cc1"
+    // const proxyurl = "https://mysterious-wave-96239.herokuapp.com/";
+    // const url = "https://na1.api.riotgames.com/lol/league/v4/entries/by-summoner/" + this.state.id + "?api_key=RGAPI-031ffc06-01a2-4696-9e40-235d76f08cc1"
     //  +process.env.REACT_APP_SECRET_KEY;
     // site that doesn’t send Access-Control-*
-        fetch(proxyurl + url) // https://mysterious-wave-96239.herokuapp.com/https://na1.api.riotgames.com/lol/league/v4/entries/by-summoner/
+        fetch(`/api/summonerRank/${this.state.id}`) // https://mysterious-wave-96239.herokuapp.com/https://na1.api.riotgames.com/lol/league/v4/entries/by-summoner/
         .then(res => res.json())
         .then(
           (result) => {

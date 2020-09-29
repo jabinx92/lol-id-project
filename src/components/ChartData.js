@@ -40,10 +40,9 @@ class ChartData extends Component {
         let championList = [];
         let queueObj = {};
         if(!this.state.accountId) {return}
-        const proxyurl = "https://mysterious-wave-96239.herokuapp.com/";
-        const url = "https://na1.api.riotgames.com/lol/match/v4/matchlists/by-account/" + this.state.accountId + "?endIndex=20&api_key=RGAPI-031ffc06-01a2-4696-9e40-235d76f08cc1" 
-        // +process.env.REACT_APP_SECRET_KEY;
-        fetch(proxyurl + url)
+        // const proxyurl = "https://mysterious-wave-96239.herokuapp.com/";
+        // const url = "https://na1.api.riotgames.com/lol/match/v4/matchlists/by-account/" + this.state.accountId + "?endIndex=20&api_key=RGAPI-031ffc06-01a2-4696-9e40-235d76f08cc1" 
+        fetch(`/api/getHero/${this.state.accountId}`)
         .then(res => res.json())
         .then(
             (result) => {
@@ -117,9 +116,9 @@ class ChartData extends Component {
     getHeroJson = (championList) => {
       let championObj = {}
       let roleObj = {};
-      const proxyurl = "https://mysterious-wave-96239.herokuapp.com/";
+      // const proxyurl = "https://mysterious-wave-96239.herokuapp.com/";
         const url = "https://ddragon.leagueoflegends.com/cdn/10.15.1/data/en_US/champion.json";
-          fetch(proxyurl + url) 
+          fetch(url) 
             .then(response => response.json())
             .then(contents => {
                   this.setState({championJSON : contents})

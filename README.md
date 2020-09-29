@@ -1,5 +1,7 @@
 Note for jabinx92 - 'npm run build' + 'firebase deploy' = deploys current version to google firebase
 
+Note for jabinx92 #2 to run on localhosts: cd reactexpress + npm run dev = runs frontend and backend on localhost 3000 concurrently
+
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
 ## Available Scripts

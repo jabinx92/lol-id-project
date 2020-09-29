@@ -27,10 +27,12 @@ class FindSummoner extends Component {
     }
     
     componentDidMount() {
-    const proxyurl = "https://mysterious-wave-96239.herokuapp.com/";
-    const url = "https://na1.api.riotgames.com/lol/summoner/v4/summoners/by-name/" + this.state.username + "?api_key=RGAPI-031ffc06-01a2-4696-9e40-235d76f08cc1"
+    // const proxyurl = "https://mysterious-wave-96239.herokuapp.com/";
+    // const url = "https://na1.api.riotgames.com/lol/summoner/v4/summoners/by-name/" + this.state.username + "?api_key=RGAPI-031ffc06-01a2-4696-9e40-235d76f08cc1"
+    
     //  + process.env.REACT_APP_SECRET_KEY; // site that doesn’t send Access-Control-*
-      fetch(proxyurl + url) // https://mysterious-wave-96239.herokuapp.com/https://na1.api.riotgames.com/lol/summoner/v4/summoners/by-name/
+      // fetch(proxyurl + url)
+         fetch(`/api/${this.state.username}`)
         .then(res => res.json())
         .then(
           (result) => {
