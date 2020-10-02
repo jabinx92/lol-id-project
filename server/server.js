@@ -33,6 +33,6 @@ app.get(`/api/summonerRank/:id`, (req, res) => {
 });
 
 
-const port = 8080;
+const port = 5000;
 
-app.listen(port, () => console.log(`Server started on port ${port}`))
+app.listen(port, '0.0.0.0')
