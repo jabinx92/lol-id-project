@@ -32,7 +32,7 @@ class FindSummoner extends Component {
     
     //  + process.env.REACT_APP_SECRET_KEY; // site that doesn’t send Access-Control-*
       // fetch(proxyurl + url)
-         fetch(`/api/${this.state.username}`)
+         fetch('/api/' + this.state.username)
         .then(res => res.json())
         .then(
           (result) => {

@@ -4,9 +4,10 @@
   "description": "Boilerplate for React and Express",
   "main": "server.js",
   "scripts": {
-    "start": "concurrently \"npm run server\" \"cd ../client && npm start\"",
+    "start": "node server.js",
     "server": "nodemon server.js",
-    "client": "cd .. && npm start"
+    "client": "cd ../client && npm start",
+    "dev": "concurrently \"npm run server\" \"npm run client\"" 
   },
   "author": "Johnny Won",
   "license": "MIT",
