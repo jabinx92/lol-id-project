@@ -72,9 +72,7 @@ class FindSummoner extends Component {
       return (<Section dark><UserInfoStyles><h1>Loading...</h1></UserInfoStyles></Section>);
     } else if(isLoaded) {
       return (
-
         <Section dark>
-
         {name ?  (
           <UserInfoStyles>
               <Corner />

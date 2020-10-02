@@ -2,6 +2,7 @@
   "name": "lol-finder-project",
   "version": "0.1.0",
   "private": true,
+  "homepage": "/",
   "dependencies": {
     "@githubprimer/octicons-react": "^8.5.0",
     "@primer/octicons-react": "^11.0.0",
@@ -25,12 +26,13 @@
     "styled-components": "^5.1.1"
   },
   "scripts": {
-    "start": "react-scripts start",
+    "start": "concurrently \"react-scripts start\" \"npm run server\"",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "server": "cd reactexpress && npm run server"
   },
-  "proxy": "http://localhost:5001",
+  "proxy": "http://localhost:8080",
   "eslintConfig": {
     "extends": "react-app"
   },
