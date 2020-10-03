@@ -7,7 +7,7 @@
     "start": "node server.js",
     "server": "nodemon server.js",
     "client": "cd ../client && npm start",
-    "dev": "concurrently \"npm run server\" \"npm run client\"" 
+    "dev": "concurrently \"npm run server\" \"npm run client\""
   },
   "author": "Johnny Won",
   "license": "MIT",
