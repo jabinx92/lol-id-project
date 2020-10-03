@@ -1,6 +1,8 @@
 const express = require('express');
+const path = require('path');
 const app = express();
 const fetch = require('node-fetch');
+
 
 //fetch info when you type a username or fetch chartdata
 app.get(`/api/:username`, (req, res) => {
@@ -33,6 +35,6 @@ app.get(`/api/summonerRank/:id`, (req, res) => {
 });
 
 
-const port = 5000;
+const port = 8080;
 
 app.listen(port, '0.0.0.0')
