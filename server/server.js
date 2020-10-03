@@ -37,4 +37,6 @@ app.get(`/api/summonerRank/:id`, (req, res) => {
 
 const port = 8080;
 
-app.listen(port, '0.0.0.0')
+app.listen(process.env.PORT || 8080, '0.0.0.0', function(err) {
+    console.log("Started listening on %s", app.url);
+  });
