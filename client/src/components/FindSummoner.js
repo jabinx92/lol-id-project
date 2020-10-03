@@ -10,10 +10,8 @@ import Corner from './Corner'
 
 
 class FindSummoner extends Component {
-    constructor(props) {
-      super(props);
-      this.state = {
-        username : props.username,
+    state = {
+        username : this.props.username,
         error: null,
         isLoaded: false,
         id: null,
@@ -24,7 +22,7 @@ class FindSummoner extends Component {
         summonerLevel: null,
         test: null,
       };
-    }
+    
     
     componentDidMount() {
     // const proxyurl = "https://mysterious-wave-96239.herokuapp.com/";

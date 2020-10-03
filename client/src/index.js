@@ -7,9 +7,10 @@ import * as serviceWorker from './serviceWorker';
 
 
 ReactDOM.render(
-  <React.StrictMode>
+  // <React.StrictMode> //react strict mode is used to find unsafe legacy lifecycle methods fyi
     <App/>
-  </React.StrictMode>,
+  // </React.StrictMode>
+  ,
   document.getElementById('root')
 );
 

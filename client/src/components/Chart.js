@@ -2,15 +2,13 @@ import React, {Component} from 'react'
 import ChartData from './ChartData'
 
 class Chart extends Component {
-    constructor(props) {
-        super(props)
-        this.state = {
+    state = {
             error: null,
             isLoaded: false,
             stats: [],
             accountId: ''
         }
-    }
+    
 
     
     componentDidMount = () => {

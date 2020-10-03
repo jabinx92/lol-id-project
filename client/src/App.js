@@ -4,14 +4,10 @@ import FindSummoner from './components/FindSummoner';
 import Chart from './components/Chart'
 
 class App extends Component {
-  constructor(props) {
-    super(props)
-    
-    this.state = {
+  state = {
       username: '',
       redirectToReferrer: false
     }
-  }
 
   handleSubmit = (event) => {
     event.preventDefault();

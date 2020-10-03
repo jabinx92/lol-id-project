@@ -15,12 +15,10 @@ import Footer from './Footer'
 //400 - normal draft 
 
 class ChartData extends Component {
-    constructor(props) {
-        super(props)
-        this.state = {
+    state = {
             error: null,
             isLoaded: false,
-            accountId: props.accountId,
+            accountId: this.props.accountId,
             matchHistory: [],
             chartData: {},
             championLibrary: {},
@@ -30,7 +28,7 @@ class ChartData extends Component {
             championJSON: null,
             repoData: null
         }
-    }
+    
 
     componentDidMount = () => {
         this.getMatchHistory();

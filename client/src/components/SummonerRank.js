@@ -2,15 +2,12 @@ import React, { Component } from 'react';
 import { Image, Media } from 'react-bootstrap';
 
 class SummonerRank extends Component {
-    constructor(props) {
-      super(props);
-      this.state = {
+    state = {
         error: null,
         isLoaded: false,
-        id: props.id,
+        id: this.props.id,
         stats: []
       };
-    }
     
   
     componentDidMount() {
