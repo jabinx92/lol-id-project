@@ -1,5 +1,3 @@
-Note for jabinx92 - 'npm run build' + 'firebase deploy' = deploys current version to google firebase
-
 Heroku note - used http://www.uptimerobot.com/ to constantly keep heroku app awake every 5 minutes, so it does not sleep.
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
