@@ -1,20 +1,22 @@
 {
-  "name": "lol-id-project",
+  "name": "reactexpress",
   "version": "1.0.0",
-  "description": "Note for jabinx92 - 'npm run build' + 'firebase deploy' = deploys current version to google firebase",
-  "main": "index.js",
+  "description": "Boilerplate for React and Express",
+  "main": "server.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "node server.js",
+    "server": "nodemon server.js",
+    "client": "cd ../client && npm start",
+    "dev": "concurrently \"npm run server\" \"npm run client\""
   },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/jabinx92/lol-id-project.git"
+  "author": "Johnny Won",
+  "license": "MIT",
+  "dependencies": {
+    "concurrently": "^5.3.0",
+    "express": "^4.17.1",
+    "node-fetch": "^2.6.1"
   },
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/jabinx92/lol-id-project/issues"
-  },
-  "homepage": "https://github.com/jabinx92/lol-id-project#readme"
+  "devDependencies": {
+    "nodemon": "^2.0.4"
+  }
 }
