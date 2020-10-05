@@ -4,7 +4,7 @@ const path = require('path');
 const app = express();
 const fetch = require('node-fetch');
 
-
+app.use(express.static(__dirname +'/build'));
 //fetch info when you type a username or fetch chartdata
 app.get(`/api/:username`, (req, res) => {
 
@@ -35,6 +35,13 @@ app.get(`/api/summonerRank/:id`, (req, res) => {
     .then(result => res.json(result));
 });
 
+app.get("/" , (req ,res) => {
+  res.sendFile(path.join(__dirname, '/build', 'index.html'))
+})
+
+app.get("*" , (req ,res) => {
+  res.sendFile(path.join(__dirname, '/build', 'index.html'))
+})
 
 const PORT = process.env.PORT || 8080;
 
