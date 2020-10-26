@@ -1,3 +1,5 @@
+jabinx92 note - this project is in correlation to your "lol-test-deploy" repo. Open that file, make changes with npm start + node server.js. Once changes have been made, run npm run build and copy the build file to replace this build file, commit changes and heroku automatically redeploys.
+
 Heroku note - used http://www.uptimerobot.com/ to constantly keep heroku app awake every 5 minutes, so it does not sleep.
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
