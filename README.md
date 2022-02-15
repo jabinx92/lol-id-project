@@ -1,4 +1,4 @@
-jabinx92 note - This project is in correlation to your "lol-test-deploy" repo. IF you are running this in a new environment, make sure to do "npm install" in terminal. Open that file, make changes with npm start + node server.js. Once changes have been made, run npm run build and copy the build file to replace this build file, commit changes and heroku automatically redeploys.
+jabinx92 note - This project is in correlation to your "lol-test-deploy" repo. Open that file, make changes with npm start + node server.js. Once changes have been made, run npm run build and copy the build file to replace this build file, commit changes and heroku automatically redeploys.
 
 Heroku note - used http://www.uptimerobot.com/ to constantly keep heroku app awake every 5 minutes, so it does not sleep.
 
