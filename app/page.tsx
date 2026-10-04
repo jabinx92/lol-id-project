@@ -1,0 +1,36 @@
+"use client";
+
+import { FormEvent, useMemo, useState } from "react";
+import { Activity, ArrowRight, BarChart3, Crosshair, Search, ShieldCheck, Sparkles, Swords, Trophy } from "lucide-react";
+
+type Champion = { id:number; name:string; slug:string; masteryLevel:number; masteryPoints:number; games:number; wins:number };
+type Profile = { demo:boolean; gameName:string; tagLine:string; platform:string; level:number; profileIconId:number; rank:null|{tier:string;division:string;leaguePoints:number;wins:number;losses:number}; recent:{wins:number;losses:number;kda:number;games:number}; champions:Champion[] };
+const regions = [["na1","North America"],["euw1","Europe West"],["eun1","Europe Nordic & East"],["kr","Korea"],["br1","Brazil"],["jp1","Japan"],["oc1","Oceania"]] as const;
+const champImage=(slug:string)=>`https://ddragon.leagueoflegends.com/cdn/img/champion/tiles/${slug}_0.jpg`;
+const compact=(n:number)=>new Intl.NumberFormat("en-US",{notation:"compact",maximumFractionDigits:1}).format(n);
+
+function StatCard({icon,label,value,note}:{icon:React.ReactNode;label:string;value:string;note:string}) {
+  return <div className="stat-card"><div className="stat-icon">{icon}</div><div><p>{label}</p><strong>{value}</strong><span>{note}</span></div></div>;
+}
+
+export default function Home(){
+  const [query,setQuery]=useState("Johnny#NA1"); const [platform,setPlatform]=useState("na1");
+  const [profile,setProfile]=useState<Profile|null>(null); const [loading,setLoading]=useState(false); const [error,setError]=useState("");
+  const winRate=useMemo(()=>{if(!profile)return 0;const total=profile.rank?profile.rank.wins+profile.rank.losses:profile.recent.games;const wins=profile.rank?profile.rank.wins:profile.recent.wins;return total?Math.round(wins/total*100):0},[profile]);
+  async function searchPlayer(e:FormEvent){e.preventDefault();setError("");const [gameName,tagLine]=query.split("#");if(!gameName?.trim()||!tagLine?.trim()){setError("Use a Riot ID like PlayerName#NA1.");return}setLoading(true);try{const res=await fetch(`/api/player?gameName=${encodeURIComponent(gameName.trim())}&tagLine=${encodeURIComponent(tagLine.trim())}&platform=${platform}`);const data=await res.json();if(!res.ok)throw new Error(data.error||"We could not find that player.");setProfile(data)}catch(caught){setError(caught instanceof Error?caught.message:"Something went wrong.")}finally{setLoading(false)}}
+  return <main>
+    <nav className="nav shell"><a className="brand" href="#top"><span className="brand-mark"><Crosshair size={20}/></span>RIFT<span>SCOUT</span></a><div className="nav-meta"><span className="status-dot"/> Riot API ready</div></nav>
+    <section className="hero shell" id="top"><div className="eyebrow"><Sparkles size={14}/> Know your next move</div><h1>Your climb, <em>decoded.</em></h1><p>Search any League player. See the champions, habits, and numbers behind their ranked journey.</p>
+      <form className="search-box" onSubmit={searchPlayer}><div className="search-input-wrap"><Search size={21}/><label className="sr-only" htmlFor="riot-id">Riot ID</label><input id="riot-id" value={query} onChange={e=>setQuery(e.target.value)} placeholder="GameName#TAG"/></div><label className="sr-only" htmlFor="region">Region</label><select id="region" value={platform} onChange={e=>setPlatform(e.target.value)}>{regions.map(([v,l])=><option key={v} value={v}>{l}</option>)}</select><button disabled={loading}>{loading?"Scouting…":<>Scout player <ArrowRight size={18}/></>}</button></form>
+      {error&&<p className="form-error" role="alert">{error}</p>}<p className="hint">Try the demo above, or enter a Riot ID with its #tag.</p>
+    </section>
+    {!profile?<section className="empty-state shell"><div className="radar"><span/><span/><span/><Crosshair/></div><h2>One search. A clearer game plan.</h2><div className="feature-row"><div><Trophy/><strong>Rank at a glance</strong><span>Wins, losses, LP, and season win rate.</span></div><div><BarChart3/><strong>Champion patterns</strong><span>Your best picks across recent matches.</span></div><div><Activity/><strong>Recent form</strong><span>A quick read on momentum and KDA.</span></div></div></section>:
+    <section className="dashboard shell" aria-live="polite">{profile.demo&&<div className="demo-banner"><Sparkles size={16}/> Demo data is showing. Add a Riot API key to search live players.</div>}
+      <div className="profile-card"><div className="avatar-wrap"><img src={`https://ddragon.leagueoflegends.com/cdn/15.18.1/img/profileicon/${profile.profileIconId}.png`} alt="Player profile icon"/><span>{profile.level}</span></div><div className="profile-copy"><p className="overline">{regions.find(([v])=>v===profile.platform)?.[1]||profile.platform}</p><h2>{profile.gameName}<small>#{profile.tagLine}</small></h2><div className="verified"><ShieldCheck size={14}/> Summoner profile</div></div><div className="rank-block"><div className="rank-emblem"><Trophy size={32}/></div><div><p>Ranked solo</p><strong>{profile.rank?`${profile.rank.tier} ${profile.rank.division}`:"Unranked"}</strong><span>{profile.rank?`${profile.rank.leaguePoints} LP`:"No games yet"}</span></div></div></div>
+      <div className="stats-grid"><StatCard icon={<Swords/>} label="Season record" value={profile.rank?`${profile.rank.wins}W · ${profile.rank.losses}L`:"—"} note={`${winRate}% win rate`}/><StatCard icon={<Activity/>} label="Recent form" value={`${profile.recent.wins}W · ${profile.recent.losses}L`} note={`Last ${profile.recent.games} games`}/><StatCard icon={<Crosshair/>} label="Recent KDA" value={profile.recent.kda.toFixed(2)} note="Kills + assists per death"/></div>
+      <div className="content-grid"><article className="panel champion-panel"><div className="panel-heading"><div><p className="overline">Champion pool</p><h3>Recent favorites</h3></div><span>Last {profile.recent.games} matches</span></div><div className="champion-list">{profile.champions.map((c,i)=>{const rate=c.games?Math.round(c.wins/c.games*100):0;return <div className="champion-row" key={c.id}><span className="placement">0{i+1}</span><img src={champImage(c.slug)} alt=""/><div className="champion-name"><strong>{c.name}</strong><span>Mastery {c.masteryLevel} · {compact(c.masteryPoints)} pts</span></div><div className="bar-track"><span style={{width:`${Math.max(8,rate)}%`}}/></div><div className="champion-record"><strong>{c.games?`${rate}%`:"—"}</strong><span>{c.games?`${c.wins}W · ${c.games-c.wins}L`:"Mastery pick"}</span></div></div>})}</div></article>
+      <aside className="panel pulse-panel"><p className="overline">Scout pulse</p><h3>{profile.recent.wins>=profile.recent.losses?"Momentum is building.":"A reset could help."}</h3><div className="win-ring" style={{"--rate":`${profile.recent.games?Math.round(profile.recent.wins/profile.recent.games*100):0}%`} as React.CSSProperties}><div><strong>{profile.recent.games?Math.round(profile.recent.wins/profile.recent.games*100):0}%</strong><span>recent wins</span></div></div><p className="insight">{profile.champions[0]?.name||"Your top champion"} leads the current pool. Keep the sample small and judge trends over more games.</p></aside></div>
+    </section>}
+    <footer className="shell">RIFT SCOUT <span>•</span> Not endorsed by Riot Games. Riot Games and associated properties are trademarks of Riot Games, Inc.</footer>
+  </main>
+}
