@@ -14,7 +14,7 @@ function StatCard({icon,label,value,note}:{icon:React.ReactNode;label:string;val
 }
 
 export default function Home(){
-  const [query,setQuery]=useState("Johnny#NA1"); const [platform,setPlatform]=useState("na1");
+  const [query,setQuery]=useState("T1 Faker#4101"); const [platform,setPlatform]=useState("kr");
   const [profile,setProfile]=useState<Profile|null>(null); const [loading,setLoading]=useState(false); const [error,setError]=useState("");
   const winRate=useMemo(()=>{if(!profile)return 0;const total=profile.rank?profile.rank.wins+profile.rank.losses:profile.recent.games;const wins=profile.rank?profile.rank.wins:profile.recent.wins;return total?Math.round(wins/total*100):0},[profile]);
   async function searchPlayer(e:FormEvent){e.preventDefault();setError("");const [gameName,tagLine]=query.split("#");if(!gameName?.trim()||!tagLine?.trim()){setError("Use a Riot ID like PlayerName#NA1.");return}setLoading(true);try{const res=await fetch(`/api/player?gameName=${encodeURIComponent(gameName.trim())}&tagLine=${encodeURIComponent(tagLine.trim())}&platform=${platform}`);const data=await res.json();if(!res.ok)throw new Error(data.error||"We could not find that player.");setProfile(data)}catch(caught){setError(caught instanceof Error?caught.message:"Something went wrong.")}finally{setLoading(false)}}
@@ -22,7 +22,7 @@ export default function Home(){
     <nav className="nav shell"><a className="brand" href="#top"><span className="brand-mark"><Crosshair size={20}/></span>RIFT<span>SCOUT</span></a><div className="nav-meta"><span className="status-dot"/> Riot API ready</div></nav>
     <section className="hero shell" id="top"><div className="eyebrow"><Sparkles size={14}/> Know your next move</div><h1>Your climb, <em>decoded.</em></h1><p>Search any League player. See the champions, habits, and numbers behind their ranked journey.</p>
       <form className="search-box" onSubmit={searchPlayer}><div className="search-input-wrap"><Search size={21}/><label className="sr-only" htmlFor="riot-id">Riot ID</label><input id="riot-id" value={query} onChange={e=>setQuery(e.target.value)} placeholder="GameName#TAG"/></div><label className="sr-only" htmlFor="region">Region</label><select id="region" value={platform} onChange={e=>setPlatform(e.target.value)}>{regions.map(([v,l])=><option key={v} value={v}>{l}</option>)}</select><button disabled={loading}>{loading?"Scouting…":<>Scout player <ArrowRight size={18}/></>}</button></form>
-      {error&&<p className="form-error" role="alert">{error}</p>}<p className="hint">Try the demo above, or enter a Riot ID with its #tag.</p>
+      {error&&<p className="form-error" role="alert">{error}</p>}<p className="hint">Faker is loaded as a working example—or enter any Riot ID with its #tag.</p>
     </section>
     {!profile?<section className="empty-state shell"><div className="radar"><span/><span/><span/><Crosshair/></div><h2>One search. A clearer game plan.</h2><div className="feature-row"><div><Trophy/><strong>Rank at a glance</strong><span>Wins, losses, LP, and season win rate.</span></div><div><BarChart3/><strong>Champion patterns</strong><span>Your best picks across recent matches.</span></div><div><Activity/><strong>Recent form</strong><span>A quick read on momentum and KDA.</span></div></div></section>:
     <section className="dashboard shell" aria-live="polite">{profile.demo&&<div className="demo-banner"><Sparkles size={16}/> Demo data is showing. Add a Riot API key to search live players.</div>}
